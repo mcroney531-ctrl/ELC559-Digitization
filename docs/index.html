@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rewind — Media Digitization Desk</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="canvas" id="canvas">
+  <div class="scanlines"></div>
+
+  <!-- SCENE 0: INTRO -->
+  <section class="scene active" id="scene-intro">
+    <div class="intro-card">
+      <h1>Media Digitization Desk</h1>
+      <p class="intro-sub">Maple Street Public Library</p>
+      <p class="intro-body">Patrons can have personal home videos digitized for free — subject to library copyright policy. Run the equipment, greet your patrons, and use good judgment.</p>
+      <button class="btn-primary" id="btn-start">Start Shift</button>
+    </div>
+  </section>
+
+  <!-- SCENE 1: PROCEDURE (shared for both patrons) -->
+  <section class="scene" id="scene-procedure">
+    <div class="step-banner" id="step-banner">Step 1 of 11 — Insert the tape</div>
+    <div class="progress-dots" id="progress-dots"></div>
+
+    <div class="desk">
+      <div class="tape-waiting" id="tape-waiting">
+        <div class="tape-waiting-label" id="tape-waiting-label">Carol's Graduation<br>Ridgeline University, 1998</div>
+      </div>
+
+      <div class="vcr" id="vcr">
+        <div class="vcr-slot" id="vcr-slot">
+          <div class="tape" id="tape-graphic">
+            <div class="tape-label" id="tape-label">Carol's Graduation<br>Ridgeline University, 1998</div>
+          </div>
+        </div>
+        <div class="vcr-display"><span id="tape-counter">----</span></div>
+        <div class="vcr-buttons">
+          <button class="vcr-btn" id="btn-rewind" title="Rewind"><span class="icon-rewind"><span class="icon-tri-left"></span><span class="icon-tri-left"></span></span></button>
+          <button class="vcr-btn" id="btn-play" title="Play"><span class="icon-tri-right"></span></button>
+          <button class="vcr-btn" id="btn-power-vcr" title="Power"><span class="icon-power"></span></button>
+        </div>
+      </div>
+
+      <div class="cable-bundle" id="cable-bundle">
+        <div class="cable-jack yellow" data-cable="video"></div>
+        <div class="cable-jack white" data-cable="audio-l"></div>
+        <div class="cable-jack red" data-cable="audio-r"></div>
+      </div>
+
+      <div class="capture-box" id="capture-box">
+        <span class="capture-label" id="capture-power-label">ClipCatch</span>
+      </div>
+
+      <div class="monitor" id="monitor">
+        <div class="monitor-screen" id="monitor-screen">
+          <div class="desktop-view" id="desktop-view">
+            <div class="desktop-icon" data-icon="correct"><span class="app-glyph app-glyph-video"></span><span>ClipCatch</span></div>
+            <div class="desktop-icon" data-icon="mail"><span class="app-glyph app-glyph-mail"></span><span>Mail</span></div>
+            <div class="desktop-icon" data-icon="photos"><span class="app-glyph app-glyph-photos"></span><span>Photos</span></div>
+            <div class="desktop-icon" data-icon="browser"><span class="app-glyph app-glyph-browser"></span><span>Browser</span></div>
+          </div>
+          <div class="software-window" id="software-window" hidden>
+            <div class="software-titlebar">ClipCatch Capture</div>
+            <div class="software-body">
+              <select id="input-select">
+                <option value="">Select input source…</option>
+                <option value="composite-ntsc">Composite In — NTSC</option>
+                <option value="svideo-pal">S-Video In — PAL</option>
+                <option value="hdmi">HDMI In</option>
+              </select>
+              <div class="software-preview" id="software-preview"></div>
+              <input type="range" id="tracking-slider" min="0" max="100" value="0" hidden>
+              <div class="progress-track" id="progress-track" hidden><div class="progress-fill" id="progress-fill"></div></div>
+              <div class="software-controls">
+                <button id="btn-record" class="sw-btn record"><span class="icon-circle"></span> Record</button>
+                <button id="btn-stop-capture" class="sw-btn" hidden><span class="icon-square"></span> Stop</button>
+                <input type="text" id="filename-field" class="filename-field" hidden readonly>
+                <button id="btn-save" class="sw-btn" hidden>Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialogue-strip" id="dialogue-strip">
+      <div class="dialogue-avatar" id="dialogue-avatar">C</div>
+      <div class="dialogue-text" id="dialogue-text"></div>
+      <button class="dialogue-next" id="dialogue-next" hidden>&rsaquo;</button>
+    </div>
+  </section>
+
+  <!-- SCENE 2: DECISION -->
+  <section class="scene" id="scene-decision">
+    <p class="decision-prompt" id="decision-prompt">This tape isn't Gary's personal footage — it's a copy of a copyrighted broadcast special. What do you do?</p>
+    <div class="decision-choices" id="decision-choices">
+      <button class="choice-card" data-choice="a">"Sure, no problem." <br><small>Duplicate it anyway.</small></button>
+      <button class="choice-card" data-choice="b">"No, sorry, can't do it." <br><small>Flat refusal, no explanation.</small></button>
+      <button class="choice-card" data-choice="c">"This looks like it might be copyrighted — let me explain and see if there's another option." <br><small>Explain the policy and offer an alternative.</small></button>
+    </div>
+    <div class="consequence-box" id="consequence-box" hidden>
+      <p id="consequence-text"></p>
+      <button class="btn-primary" id="btn-to-reflection">Continue</button>
+    </div>
+  </section>
+
+  <!-- SCENE 3: REFLECTION -->
+  <section class="scene" id="scene-reflection">
+    <h2>Shift complete.</h2>
+    <p id="reflection-line"></p>
+    <div class="policy-box">
+      <strong>Why this policy exists:</strong> A personal home recording belongs to the person who filmed it — there's no copyright issue in duplicating it for them. A recording of broadcast or commercial programming is copyrighted material owned by someone else — duplicating it, even for a patron's personal use, isn't legally allowed without permission from the rights holder.
+    </div>
+    <button class="btn-primary" id="btn-finish">Finish</button>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
