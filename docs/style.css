@@ -152,10 +152,13 @@ html, body {
 }
 .dot {
   width: 16px; height: 16px;
+  padding: 0;
   border-radius: 50%;
   background: rgba(0,0,0,0.25);
   border: 2px solid rgba(0,0,0,0.35);
+  cursor: pointer;
 }
+.dot:disabled { cursor: default; }
 .dot.done { background: var(--teal-light); border-color: var(--teal-dark); }
 .dot.current { background: var(--amber); border-color: var(--amber-dark); box-shadow: 0 0 10px rgba(255,179,71,0.7); }
 
@@ -641,3 +644,71 @@ html, body {
 .app-glyph-mail { background: var(--teal-light); }
 .app-glyph-photos { background: var(--cable-red); }
 .app-glyph-browser { background: var(--equip-light); }
+
+/* ---------- SPOTLIGHT / CALLOUT (step-by-step guided mode) ---------- */
+.spotlight-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.68);
+  z-index: 15;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.spotlight-overlay[hidden] { display: none; }
+
+.spotlight-active {
+  z-index: 20;
+  outline: 5px solid var(--amber);
+  outline-offset: 6px;
+  border-radius: 8px;
+  filter: drop-shadow(0 0 16px rgba(255,179,71,0.85));
+}
+.vcr-btn.spotlight-active,
+.sw-btn.spotlight-active {
+  position: relative;
+}
+
+.callout-card {
+  position: absolute;
+  top: 18px; left: 110px;
+  width: 780px;
+  z-index: 25;
+  background: linear-gradient(180deg, var(--equip-dark), #141416);
+  border: 3px solid var(--amber-dark);
+  border-radius: 10px;
+  padding: 20px 26px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.5), 0 0 0 2px rgba(0,0,0,0.4);
+}
+.callout-card[hidden] { display: none; }
+.callout-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--amber-glow);
+  margin-bottom: 8px;
+}
+.callout-instruction {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--cream);
+}
+.callout-tip {
+  margin-top: 8px;
+  font-family: 'Special Elite', monospace;
+  font-size: 14px;
+  color: var(--teal-light);
+  font-style: italic;
+}
+.callout-next {
+  margin-top: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  background: transparent;
+  color: var(--amber);
+  border: 2px solid var(--amber);
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+.callout-next:hover { background: var(--amber); color: #2a1a05; }

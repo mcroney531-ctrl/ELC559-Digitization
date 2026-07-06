@@ -1,15 +1,15 @@
-const STEP_LABELS = [
-  "Step 1 of 11 — Insert the tape",
-  "Step 2 of 11 — Rewind the tape",
-  "Step 3 of 11 — Check the cable connections",
-  "Step 4 of 11 — Power on the equipment",
-  "Step 5 of 11 — Open the capture software",
-  "Step 6 of 11 — Select input source & format",
-  "Step 7 of 11 — Preview & adjust tracking",
-  "Step 8 of 11 — Start capture (Record, then Play)",
-  "Step 9 of 11 — Let it run, then Stop",
-  "Step 10 of 11 — Save the file",
-  "Step 11 of 11 — Eject and return the tape"
+const STEP_COPY = [
+  { instruction: "Click the tape sitting on the desk to load it into the VCR.", tip: "Make sure the label faces up — it should slide in smoothly." },
+  { instruction: "Press Rewind to confirm the tape is cued to the very beginning.", tip: "Never assume a tape's already rewound — always check first." },
+  { instruction: "Click each of the three cables to confirm they're seated in the right port.", tip: "Yellow carries video. White and red carry left/right audio." },
+  { instruction: "Power on both the VCR and the capture device.", tip: "Both units need power before the software can see a signal." },
+  { instruction: "Open the capture software from the desktop.", tip: "Look for the ClipCatch icon — not Mail, Photos, or the browser." },
+  { instruction: "Select the correct input source and video format.", tip: "Composite In + NTSC is the standard for home VHS tapes." },
+  { instruction: "Drag the tracking slider until the picture locks in clean.", tip: "A rolling or staticky picture means the tracking's off." },
+  { instruction: "Press Record on the software first, then Play on the VCR.", tip: "Order matters — Play before Record wastes the tape's leader." },
+  { instruction: "Let the capture run, then press Stop when it's done.", tip: "Keep an eye on the progress bar as the tape plays through." },
+  { instruction: "Confirm the filename and click Save.", tip: "Files save to the Patron Digitization Requests folder." },
+  { instruction: "Click the tape to eject it and hand it back with a claim ticket.", tip: "Always return the original — you're making a copy, not keeping it." }
 ];
 
 const PATRONS = {
@@ -52,6 +52,14 @@ const dom = {
   canvas: el("canvas"),
   stepBanner: el("step-banner"),
   progressDots: el("progress-dots"),
+  spotlightOverlay: el("spotlight-overlay"),
+  calloutCard: el("callout-card"),
+  calloutTitle: el("callout-title"),
+  calloutInstruction: el("callout-instruction"),
+  calloutTip: el("callout-tip"),
+  calloutNext: el("callout-next"),
+  vcr: el("vcr"),
+  monitor: el("monitor"),
   tapeGraphic: el("tape-graphic"),
   tapeLabel: el("tape-label"),
   tapeWaiting: el("tape-waiting"),
@@ -97,23 +105,133 @@ const state = {
   choice: null
 };
 
+const STEP_TARGETS = {
+  1: () => [dom.tapeWaiting],
+  2: () => [dom.vcr],
+  3: () => [dom.cableBundle],
+  4: () => [dom.btnPowerVcr, dom.captureBox],
+  5: () => [dom.monitor],
+  6: () => [dom.monitor],
+  7: () => [dom.monitor],
+  8: () => [dom.btnRecord, dom.btnPlay],
+  9: () => [dom.monitor],
+  10: () => [dom.monitor],
+  11: () => [dom.vcr]
+};
+
 function showScene(id) {
   scenes.forEach((s) => s.classList.toggle("active", s.id === id));
 }
 
 function setStep(n) {
   state.step = n;
-  dom.stepBanner.textContent = STEP_LABELS[n - 1];
+  dom.stepBanner.textContent = `Step ${n} of 11`;
   renderDots();
+  if (state.patronKey === "carol") {
+    updateSpotlight(n);
+    updateCallout(n);
+  } else {
+    hideSpotlight();
+    hideCallout();
+  }
 }
 
 function renderDots() {
   dom.progressDots.innerHTML = "";
   for (let i = 1; i <= 11; i++) {
-    const d = document.createElement("div");
+    const d = document.createElement("button");
+    d.type = "button";
     d.className = "dot" + (i < state.step ? " done" : i === state.step ? " current" : "");
+    d.setAttribute("aria-label", `Jump to step ${i}`);
+    if (state.patronKey === "carol") {
+      d.addEventListener("click", () => fastForwardTo(i));
+    } else {
+      d.disabled = true;
+    }
     dom.progressDots.appendChild(d);
   }
+}
+
+function updateSpotlight(step) {
+  document.querySelectorAll(".spotlight-active").forEach((node) => node.classList.remove("spotlight-active"));
+  const targets = (STEP_TARGETS[step] ? STEP_TARGETS[step]() : []).filter(Boolean);
+  targets.forEach((t) => t.classList.add("spotlight-active"));
+  dom.spotlightOverlay.hidden = targets.length === 0;
+}
+
+function hideSpotlight() {
+  document.querySelectorAll(".spotlight-active").forEach((node) => node.classList.remove("spotlight-active"));
+  dom.spotlightOverlay.hidden = true;
+}
+
+function updateCallout(step) {
+  const copy = STEP_COPY[step - 1];
+  dom.calloutCard.hidden = false;
+  dom.calloutTitle.textContent = `Step ${step} of 11`;
+  dom.calloutInstruction.textContent = copy.instruction;
+  dom.calloutTip.textContent = copy.tip;
+  dom.calloutNext.textContent = step === 11 ? "Eject ›" : "Next Step ›";
+}
+
+function hideCallout() {
+  dom.calloutCard.hidden = true;
+}
+
+// Silently applies the DOM/state effects of steps 1..(targetStep-1) so the
+// player can jump straight to any step of Carol's walkthrough for reference,
+// without replaying the whole procedure.
+function fastForwardTo(targetStep) {
+  if (state.patronKey !== "carol") return;
+  targetStep = Math.max(1, Math.min(11, targetStep));
+  resetProcedureUI();
+  dom.tapeCounter.textContent = "----";
+  if (targetStep >= 2) {
+    dom.tapeWaiting.classList.add("used");
+    dom.tapeGraphic.classList.add("inserted");
+    dom.tapeCounter.textContent = String(PATRONS.carol.counterStart).padStart(4, "0");
+  }
+  if (targetStep >= 3) {
+    dom.tapeCounter.textContent = "0000";
+    state.rewound = true;
+  }
+  if (targetStep >= 4) {
+    dom.cableBundle.querySelectorAll(".cable-jack").forEach((j) => j.classList.add("confirmed"));
+  }
+  if (targetStep >= 5) {
+    state.vcrPowered = true;
+    state.capturePowered = true;
+    dom.btnPowerVcr.classList.add("active-glow");
+    dom.captureBox.classList.add("active-glow");
+  }
+  if (targetStep >= 6) {
+    dom.desktopView.hidden = true;
+    dom.softwareWindow.hidden = false;
+  }
+  if (targetStep >= 7) {
+    dom.inputSelect.value = "composite-ntsc";
+    dom.trackingSlider.hidden = false;
+  }
+  if (targetStep >= 8) {
+    dom.softwarePreview.className = "software-preview stable";
+    dom.trackingSlider.value = 50;
+    dom.trackingSlider.disabled = true;
+  }
+  if (targetStep >= 9) {
+    state.recordClicked = true;
+    state.playClicked = true;
+    dom.btnRecord.classList.add("active");
+    dom.btnRecord.disabled = true;
+    dom.progressTrack.hidden = false;
+    dom.progressFill.style.transition = "none";
+    dom.progressFill.style.width = "100%";
+  }
+  if (targetStep >= 10) {
+    dom.btnStopCapture.hidden = false;
+    dom.filenameField.hidden = false;
+    dom.filenameField.value = PATRONS.carol.filename;
+    dom.btnSave.hidden = false;
+  }
+  setStep(targetStep);
 }
 
 function flashWrong(node) {
@@ -136,6 +254,7 @@ function resetProcedureUI() {
   dom.softwarePreview.innerHTML = "";
   dom.trackingSlider.hidden = true;
   dom.trackingSlider.value = 0;
+  dom.trackingSlider.disabled = false;
   dom.progressTrack.hidden = true;
   dom.progressFill.style.width = "0%";
   dom.btnRecord.hidden = false;
@@ -179,11 +298,22 @@ dom.tapeWaiting.addEventListener("click", () => {
 });
 
 // ---- Step 11: Eject ----
-dom.tapeGraphic.addEventListener("click", () => {
-  if (state.step === 11 && dom.tapeGraphic.classList.contains("inserted")) {
-    dom.tapeGraphic.classList.remove("inserted");
-    dom.dialogueText.textContent = PATRONS.carol.closing;
-    setTimeout(() => startPatron("gary"), 1600);
+function ejectTape() {
+  if (state.step !== 11 || !dom.tapeGraphic.classList.contains("inserted")) return;
+  dom.tapeGraphic.classList.remove("inserted");
+  dom.dialogueText.textContent = PATRONS.carol.closing;
+  hideSpotlight();
+  hideCallout();
+  setTimeout(() => startPatron("gary"), 1600);
+}
+dom.tapeGraphic.addEventListener("click", ejectTape);
+
+dom.calloutNext.addEventListener("click", () => {
+  if (state.patronKey !== "carol") return;
+  if (state.step === 11) {
+    ejectTape();
+  } else {
+    fastForwardTo(state.step + 1);
   }
 });
 
@@ -193,6 +323,7 @@ dom.btnRewind.addEventListener("click", () => {
   dom.btnRewind.classList.add("active-glow");
   let n = PATRONS[state.patronKey].counterStart;
   const timer = setInterval(() => {
+    if (state.step !== 2) { clearInterval(timer); return; }
     n = Math.max(0, n - Math.ceil(n / 6) - 5);
     dom.tapeCounter.textContent = String(n).padStart(4, "0");
     if (n <= 0) {
