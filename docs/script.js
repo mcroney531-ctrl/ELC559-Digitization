@@ -49,6 +49,7 @@ const el = (id) => document.getElementById(id);
 const scenes = document.querySelectorAll(".scene");
 
 const dom = {
+  canvas: el("canvas"),
   stepBanner: el("step-banner"),
   progressDots: el("progress-dots"),
   tapeGraphic: el("tape-graphic"),
@@ -387,3 +388,16 @@ dom.btnFinish.addEventListener("click", () => {
 
 // ---- Intro ----
 dom.btnStart.addEventListener("click", () => startPatron("carol"));
+
+// ---- Scale-to-fit (canvas is a fixed 1980x1020 stage) ----
+const CANVAS_W = 1980;
+const CANVAS_H = 1020;
+function fitCanvas() {
+  const scale = Math.min(window.innerWidth / CANVAS_W, window.innerHeight / CANVAS_H);
+  const left = (window.innerWidth - CANVAS_W * scale) / 2;
+  const top = (window.innerHeight - CANVAS_H * scale) / 2;
+  dom.canvas.style.transform = `translate(${left}px, ${top}px) scale(${scale})`;
+}
+window.addEventListener("resize", fitCanvas);
+window.addEventListener("orientationchange", fitCanvas);
+fitCanvas();
