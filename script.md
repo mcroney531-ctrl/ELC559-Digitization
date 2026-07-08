@@ -53,13 +53,13 @@ Each step is a hotspot/interaction on the AV cart graphic. Numbered callouts app
 |---|------|-------------|-------------------|--------------------------|
 | 1 | Insert tape into VCR | Click the tape waiting on the desk; it slides into the slot, label-up | Tape slides in, clunk sound, counter lights up | — |
 | 2 | Check the tape counter — is it rewound? Press **Rewind** | Click Rewind button | Counter animates down to "0000," click sound | — |
-| 3 | Check cable connections | Click each of 3 RCA cables (yellow/white/red) from VCR → capture dongle → USB into computer | Cables highlight green when confirmed | If one is in wrong port: *"That cable's in the wrong input — yellow is video, white/red are audio."* |
+| 3 | Check cable connections | The yellow (video) cable starts visibly unplugged from the capture device — click it to seat it, then click white/red to confirm them | Loose cable snaps into port (SVG state swap), confirmed jacks get teal outline | — (finding the loose cable *is* the check) |
 | 4 | Power on VCR and capture device | Click both power buttons | LEDs light up | — |
 | 5 | Open the capture software | Click correct desktop icon among 3–4 decoys (e.g. "ClipCatch Capture" vs. photo editor, email, browser) | Software window opens | Wrong icon: *"Not quite — that's not the capture software."* |
 | 6 | Select input source & format | Dropdown: choose "Composite In" + "NTSC" from a short list | Preview window activates | Wrong format selected: *"Picture looks wrong — check the video standard."* (preview shows static/garbled) |
 | 7 | Preview & adjust tracking | Drag tracking slider until picture stabilizes (starts rolling/staticky) | Picture locks in clean | — |
 | 8 | Start capture — correct order | Must click **Record** (software) *then* **Play** (VCR) | Recording indicator + waveform starts | If Play clicked first: *"You just recorded blank leader — hit Record first next time."* (auto-corrects, minor time cost) |
-| 9 | Let it run / Stop | Progress bar fast-forwards (montage), then click **Stop** | "Capture complete" chime | — |
+| 9 | Let it run / Stop | Progress bar fast-forwards (montage); **Stop** unlocks and pulses when the bar completes, and the player must click it | "Capture complete" chime | — |
 | 10 | Save the file | Filename pre-filled: `Whitfield_Graduation_1998.mp4` → click **Save** to `Patron Digitization Requests` folder | Save confirmation | — |
 | 11 | Eject and return | Click **Eject**, hand tape + printed claim ticket back to Carol | — | — |
 
@@ -158,3 +158,7 @@ To keep pacing tight, compress the steps already taught. Clicking the tape to in
 - **Assets needed:** AV cart/desk background, VCR + capture dongle graphics, cable close-ups, desktop/software mockup UI, tape label insets, patron character art (2 patrons, simple/flat style is fine), original (non-trademarked) warning card graphic, network title card graphic
 - **State to track:** current step index, Scene 2 choice (A/B/C) for the dynamic Scene 3 text
 - **Keep it lightweight:** no need for real video files — the "capture preview" and "broadcast footage" can be short looping CSS/canvas animations or even static images with a subtle scanline effect to sell "old tape" texture
+- **Audio:** small synthesized SFX (clicks, tape clunk, rewind whir, chime, static hiss) via WebAudio — no audio files; user-facing SOUND ON/OFF toggle, all sounds gesture-triggered so autoplay policies don't apply
+- **Reveal staging:** Gary's warning card + network title card play as a full-screen CRT takeover overlay (static → warning card → static blip → title card → "Pause and think"), not inside the small software preview
+- **Guided mode:** every Carol step spotlights its equipment (rest of scene dims) with an instruction/tip callout card; progress dots are clickable to jump to any step (state fast-forwards silently), with a Next-Step escape hatch on the callout
+- **Accessibility:** interactive desk objects are real buttons, `prefers-reduced-motion` disables static/pulse loops, dots have aria-labels
