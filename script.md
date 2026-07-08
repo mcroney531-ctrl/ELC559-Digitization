@@ -53,7 +53,7 @@ Each step is a hotspot/interaction on the AV cart graphic. Numbered callouts app
 |---|------|-------------|-------------------|--------------------------|
 | 1 | Insert tape into VCR | Click the tape waiting on the desk; it slides into the slot, label-up | Tape slides in, clunk sound, counter lights up | — |
 | 2 | Check the tape counter — is it rewound? Press **Rewind** | Click Rewind button | Counter animates down to "0000," click sound | — |
-| 3 | Check cable connections | The yellow (video) cable starts visibly unplugged from the capture device — click it to seat it, then click white/red to confirm them | Loose cable snaps into port (SVG state swap), confirmed jacks get teal outline | — (finding the loose cable *is* the check) |
+| 3 | Check cable connections | All three cords sit connected but dimmed — check each against its port, then click each outlet to confirm | Confirmed outlet turns to a ✓ and its cord lights up with a glow; chime when all three are confirmed | — (the visual check *is* the task; hookup-guide popover on hover/tap for reference) |
 | 4 | Power on VCR and capture device | Click both power buttons | LEDs light up | — |
 | 5 | Open the capture software | Click correct desktop icon among 3–4 decoys (e.g. "ClipCatch Capture" vs. photo editor, email, browser) | Software window opens | Wrong icon: *"Not quite — that's not the capture software."* |
 | 6 | Select input source & format | Dropdown: choose "Composite In" + "NTSC" from a short list | Preview window activates | Wrong format selected: *"Picture looks wrong — check the video standard."* (preview shows static/garbled) |
