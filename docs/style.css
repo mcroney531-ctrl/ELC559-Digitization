@@ -89,77 +89,94 @@ button { font-family: inherit; }
 }
 .sfx-toggle.off { color: #8a8378; border-color: #5a5348; }
 
-/* ---------- INTRO SCENE (VHS sleeve) ---------- */
+/* ---------- INTRO SCENE (staff portal over the MPC exterior) ---------- */
 #scene-intro {
   background:
-    radial-gradient(ellipse at 50% 40%, rgba(255,214,138,0.14), transparent 60%),
-    linear-gradient(180deg, #23282e 0%, #14171b 100%);
+    linear-gradient(100deg, rgba(6,10,16,0.42) 0%, rgba(6,10,16,0.18) 45%, rgba(6,10,16,0.66) 100%),
+    url("assets/mpc-exterior.jpg") center / cover no-repeat #14171b;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-right: 140px;
 }
 #scene-intro.active { display: flex; }
-.vhs-sleeve {
-  width: 940px;
-  background: linear-gradient(180deg, #26262c, #17171b);
-  border: 3px solid #000;
-  border-radius: 8px;
-  padding: 0 0 34px;
-  box-shadow:
-    inset 0 0 0 2px rgba(255,255,255,0.05),
-    -14px 0 0 -6px #0d0d10,
-    0 30px 60px rgba(0,0,0,0.6);
-  text-align: center;
-  overflow: hidden;
+.sop-panel {
+  width: 780px;
+  background: rgba(13, 18, 24, 0.86);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border: 1px solid rgba(47, 154, 166, 0.55);
+  border-top: 4px solid var(--amber);
+  border-radius: 10px;
+  padding: 34px 44px 40px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.65), inset 0 0 0 1px rgba(255,255,255,0.04);
 }
-.sleeve-band {
+.sop-header {
   display: flex;
   justify-content: space-between;
-  background: linear-gradient(90deg, var(--teal-dark), var(--teal), var(--teal-dark));
-  border-bottom: 3px solid var(--amber-dark);
-  padding: 10px 22px;
   font-family: 'VT323', monospace;
   font-size: 19px;
-  letter-spacing: 3px;
-  color: var(--cream);
+  letter-spacing: 2px;
+  color: var(--teal-light);
+  border-bottom: 1px solid rgba(47, 154, 166, 0.35);
+  padding-bottom: 12px;
 }
-.vhs-sleeve h1 {
+.sop-panel h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 76px;
-  letter-spacing: 3px;
-  margin-top: 42px;
-  color: var(--amber-glow);
-  text-shadow: 0 0 22px rgba(255,179,71,0.45), 3px 3px 0 #4a2c08;
+  font-size: 62px;
+  letter-spacing: 2px;
+  margin-top: 6px;
+  color: var(--cream);
+  text-shadow: 0 2px 14px rgba(0,0,0,0.6);
 }
 .intro-sub {
   font-family: 'Special Elite', monospace;
-  color: var(--teal-light);
-  font-size: 23px;
-  margin-top: 8px;
+  color: var(--amber-glow);
+  font-size: 17px;
+  margin-top: 20px;
   letter-spacing: 1px;
 }
 .intro-body {
   color: var(--equip-light);
   font-size: 19px;
   line-height: 1.6;
-  margin: 26px auto 0;
-  max-width: 640px;
+  margin-top: 18px;
 }
-.sleeve-chips {
+.intro-body em { color: var(--amber-glow); font-style: normal; }
+.sop-meta {
   display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 26px;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
 }
-.sleeve-chips span {
+.sop-meta span {
   font-family: 'VT323', monospace;
-  font-size: 18px;
-  letter-spacing: 2px;
+  font-size: 17px;
+  letter-spacing: 1px;
   color: var(--cream);
-  border: 2px solid #4a4a52;
+  border: 1px solid rgba(185, 183, 176, 0.35);
   border-radius: 4px;
   padding: 3px 12px;
-  background: #101013;
+  background: rgba(0,0,0,0.45);
 }
+.sop-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 8px;
+}
+.btn-secondary {
+  margin-top: 34px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  background: transparent;
+  color: var(--teal-light);
+  border: 2px solid var(--teal-light);
+  border-radius: 6px;
+  padding: 14px 22px;
+  cursor: pointer;
+}
+.btn-secondary:hover { background: var(--teal-light); color: #06232a; }
 .btn-primary {
   margin-top: 34px;
   font-family: 'Bebas Neue', sans-serif;
@@ -179,16 +196,29 @@ button { font-family: inherit; }
 }
 .btn-primary:active { transform: translateY(4px); box-shadow: 0 0 0 var(--amber-dark); }
 .btn-primary:hover { background: var(--amber-glow); }
-.sleeve-barcode {
-  width: 220px;
-  height: 34px;
-  margin: 30px auto 0;
-  background: repeating-linear-gradient(90deg,
-    #d9d6cd 0 3px, #17171b 3px 5px, #d9d6cd 5px 6px, #17171b 6px 10px,
-    #d9d6cd 10px 12px, #17171b 12px 13px, #d9d6cd 13px 17px, #17171b 17px 19px);
-  border: 4px solid #d9d6cd;
-  border-radius: 2px;
-  opacity: 0.8;
+.dots-hint {
+  position: absolute;
+  top: 116px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 21;
+  font-family: 'VT323', monospace;
+  font-size: 19px;
+  letter-spacing: 1px;
+  color: var(--amber-glow);
+  background: rgba(0,0,0,0.78);
+  border: 2px solid var(--amber-dark);
+  border-radius: 6px;
+  padding: 7px 16px;
+}
+.dots-hint::before {
+  content: "";
+  position: absolute;
+  top: -10px; left: 50%;
+  transform: translateX(-50%);
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 10px solid var(--amber-dark);
 }
 
 /* ---------- PROCEDURE SCENE ---------- */

@@ -134,6 +134,8 @@ const dom = {
   reflectionStamp: el("reflection-stamp"),
   btnFinish: el("btn-finish"),
   btnStart: el("btn-start"),
+  btnJump: el("btn-jump"),
+  dotsHint: el("dots-hint"),
   sfxToggle: el("sfx-toggle")
 };
 
@@ -345,7 +347,7 @@ function resetProcedureUI() {
   state.captureDone = false;
 }
 
-function startPatron(key) {
+function startPatron(key, skipEligibility) {
   state.patronKey = key;
   const p = PATRONS[key];
   resetProcedureUI();
@@ -356,12 +358,12 @@ function startPatron(key) {
   dom.avatarGary.hidden = key !== "gary";
   dom.dialogueName.textContent = p.name;
   dom.dialogueText.textContent = p.intro;
-  state.awaitingEligibility = key === "carol";
+  state.awaitingEligibility = key === "carol" && !skipEligibility;
   setStep(1);
   showScene("scene-procedure");
-  if (key === "carol") {
+  if (state.awaitingEligibility) {
     dom.eligibilityCard.hidden = false;
-  } else {
+  } else if (key === "gary") {
     dom.tapeWaiting.classList.add("used");
     runGaryMontage();
   }
@@ -822,6 +824,17 @@ dom.btnFinish.addEventListener("click", () => {
 dom.btnStart.addEventListener("click", () => {
   SFX.click();
   startPatron("carol");
+});
+
+// "In the moment" entry: skip the training framing, land on the procedure
+// with the jump-dots called out so the user can go straight to their step.
+let dotsHintTimer = null;
+dom.btnJump.addEventListener("click", () => {
+  SFX.click();
+  startPatron("carol", true);
+  dom.dotsHint.hidden = false;
+  clearTimeout(dotsHintTimer);
+  dotsHintTimer = setTimeout(() => { dom.dotsHint.hidden = true; }, 4500);
 });
 
 // ---- Scale-to-fit (canvas is a fixed 1980x1020 stage) ----
