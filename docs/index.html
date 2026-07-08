@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rewind — Media Digitization Desk</title>
+<title>Patron Media Digitization — Media Preservation Center</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,21 +13,23 @@
 
   <button class="sfx-toggle" id="sfx-toggle" type="button" aria-label="Toggle sound effects">SOUND: ON</button>
 
-  <!-- SCENE 0: INTRO (styled as a VHS cassette sleeve) -->
+  <!-- SCENE 0: INTRO (staff-portal interactive SOP over the MPC exterior) -->
   <section class="scene active" id="scene-intro">
-    <div class="vhs-sleeve">
-      <div class="sleeve-band">
-        <span class="sleeve-genre">TRAINING FEATURE</span>
-        <span class="sleeve-runtime">RUN TIME: ONE SHIFT</span>
+    <div class="sop-panel">
+      <div class="sop-header">
+        <span>SOP-114 &middot; REV 3.2</span>
+        <span>STAFF USE &mdash; INTERACTIVE</span>
       </div>
-      <h1>Media Digitization Desk</h1>
-      <p class="intro-sub">Maple Street Public Library</p>
-      <p class="intro-body">Patrons can have personal home videos digitized for free — subject to library copyright policy. Run the equipment, greet your patrons, and use good judgment.</p>
-      <div class="sleeve-chips">
-        <span>SLP 0:30</span><span>HI-FI STEREO</span><span>MAPLE ST. BRANCH</span>
+      <p class="intro-sub">Media Preservation Center &middot; Maple Street Public Library</p>
+      <h1>Patron Media Digitization</h1>
+      <p class="intro-body">A patron's at the desk and you need the procedure <em>now</em>. This is the SOP in playable form &mdash; work a full shift to learn it end to end, or jump straight to the step you're unsure about.</p>
+      <div class="sop-meta">
+        <span>FORMAT: VHS &rarr; MP4</span><span>RUN TIME: ONE SHIFT</span><span>POLICY: PERSONAL RECORDINGS ONLY</span>
       </div>
-      <button class="btn-primary" id="btn-start"><span class="icon-tri-right"></span> Start Shift</button>
-      <div class="sleeve-barcode"></div>
+      <div class="sop-actions">
+        <button class="btn-primary" id="btn-start"><span class="icon-tri-right"></span> Start Shift</button>
+        <button class="btn-secondary" id="btn-jump">I just need a specific step &rsaquo;</button>
+      </div>
     </div>
   </section>
 
@@ -35,6 +37,7 @@
   <section class="scene" id="scene-procedure">
     <div class="step-banner" id="step-banner">Step 1 of 11 — Insert the tape</div>
     <div class="progress-dots" id="progress-dots"></div>
+    <div class="dots-hint" id="dots-hint" hidden>Click any dot above to jump straight to that step</div>
 
     <div class="desk">
       <div class="spotlight-overlay" id="spotlight-overlay" hidden></div>
