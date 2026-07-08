@@ -56,6 +56,34 @@
       <div class="desk-mug"></div>
       <div class="monitor-glow"></div>
 
+      <div class="cable-popover" id="cable-popover" hidden>
+        <div class="cable-popover-title">Hookup Guide</div>
+        <svg class="cable-demo" viewBox="0 0 280 150" aria-hidden="true">
+          <!-- ports -->
+          <circle cx="196" cy="35" r="11" fill="#14100a" stroke="#e0b400" stroke-width="4"/>
+          <circle cx="196" cy="75" r="11" fill="#14100a" stroke="#eae6dc" stroke-width="4"/>
+          <circle cx="196" cy="115" r="11" fill="#14100a" stroke="#b5342a" stroke-width="4"/>
+          <text x="222" y="40" class="demo-port-label">VIDEO</text>
+          <text x="222" y="80" class="demo-port-label">AUDIO L</text>
+          <text x="222" y="120" class="demo-port-label">AUDIO R</text>
+          <!-- plugs (animate in) -->
+          <g class="demo-plug" style="--d:0s">
+            <line x1="0" y1="35" x2="150" y2="35" stroke="#e0b400" stroke-width="5" stroke-linecap="round"/>
+            <rect x="150" y="27" width="30" height="16" rx="3" fill="#c9a200" stroke="#5c4a00"/>
+          </g>
+          <g class="demo-plug" style="--d:0.5s">
+            <line x1="0" y1="75" x2="150" y2="75" stroke="#eae6dc" stroke-width="5" stroke-linecap="round"/>
+            <rect x="150" y="67" width="30" height="16" rx="3" fill="#cfcac2" stroke="#6a655c"/>
+          </g>
+          <g class="demo-plug" style="--d:1s">
+            <line x1="0" y1="115" x2="150" y2="115" stroke="#b5342a" stroke-width="5" stroke-linecap="round"/>
+            <rect x="150" y="107" width="30" height="16" rx="3" fill="#9c2c22" stroke="#4a120c"/>
+          </g>
+        </svg>
+        <p>Match each plug to its color &mdash; yellow to video, white and red to audio. Click each cable on the desk once you've confirmed it's seated in the right port.</p>
+        <button class="callout-next" id="cable-popover-close" type="button">Got it</button>
+      </div>
+
       <div class="callout-card" id="callout-card" hidden>
         <div class="callout-title" id="callout-title">Step 1 of 11</div>
         <p class="callout-instruction" id="callout-instruction"></p>
