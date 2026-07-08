@@ -609,6 +609,72 @@ button { font-family: inherit; }
 }
 .cable-jack.confirmed { outline: 3px solid var(--teal-light); outline-offset: 2px; }
 
+/* ---------- cable hookup-guide popover ---------- */
+.cable-popover {
+  position: absolute;
+  left: 520px; top: 96px;
+  width: 340px;
+  z-index: 26;
+  background: linear-gradient(180deg, var(--equip-dark), #141416);
+  border: 3px solid var(--amber-dark);
+  border-radius: 10px;
+  padding: 16px 20px 18px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.55);
+}
+.cable-popover::after {
+  content: "";
+  position: absolute;
+  bottom: -16px; left: 50%;
+  transform: translateX(-50%);
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 16px solid var(--amber-dark);
+}
+.cable-popover-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 19px;
+  letter-spacing: 2px;
+  color: var(--amber-glow);
+  margin-bottom: 10px;
+}
+.cable-demo {
+  width: 100%;
+  height: 140px;
+  display: block;
+  background: #101014;
+  border: 2px solid #000;
+  border-radius: 6px;
+}
+.demo-port-label {
+  font-family: 'VT323', monospace;
+  font-size: 13px;
+  fill: #8f8d86;
+  letter-spacing: 1px;
+}
+.demo-plug {
+  animation: demo-plug-in 3s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+  opacity: 0;
+}
+@keyframes demo-plug-in {
+  0%   { transform: translateX(-80px); opacity: 0; }
+  12%  { opacity: 1; }
+  38%  { transform: translateX(0); opacity: 1; }
+  78%  { transform: translateX(0); opacity: 1; }
+  90%  { opacity: 0; }
+  100% { transform: translateX(-80px); opacity: 0; }
+}
+.cable-popover p {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--cream);
+}
+.cable-popover .callout-next { margin-top: 12px; }
+@media (prefers-reduced-motion: reduce) {
+  .demo-plug { animation: none; opacity: 1; transform: translateX(0); }
+}
+
 /* ---------- capture box ---------- */
 .capture-box {
   position: absolute;

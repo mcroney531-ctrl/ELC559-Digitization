@@ -15,7 +15,7 @@ const STEP_NAMES = [
 const STEP_COPY = [
   { instruction: "Click the tape sitting on the desk to load it into the VCR.", tip: "Make sure the label faces up — it should slide in smoothly." },
   { instruction: "Press Rewind to confirm the tape is cued to the very beginning.", tip: "Never assume a tape's already rewound — always check first." },
-  { instruction: "One cable has come loose — click it back into its port, then confirm the other two.", tip: "Yellow carries video. White and red carry left/right audio." },
+  { instruction: "One cable has come loose — click it back into its port, then confirm the other two.", tip: "Hover or tap the cable run for a hookup guide — yellow is video, white/red are audio." },
   { instruction: "Power on both the VCR and the capture device.", tip: "Both units need power before the software can see a signal." },
   { instruction: "Open the capture software from the desktop.", tip: "Look for the ClipCatch icon — not Mail, Photos, or the browser." },
   { instruction: "Select the correct input source and video format.", tip: "Composite In + NTSC is the standard for home VHS tapes." },
@@ -96,6 +96,8 @@ const dom = {
   btnPowerVcr: el("btn-power-vcr"),
   cableArea: el("cable-area"),
   cableBundle: el("cable-bundle"),
+  cablePopover: el("cable-popover"),
+  cablePopoverClose: el("cable-popover-close"),
   captureBox: el("capture-box"),
   captureLed: el("capture-led"),
   desktopView: el("desktop-view"),
@@ -236,6 +238,7 @@ function showScene(id) {
 
 function setStep(n) {
   state.step = n;
+  if (n !== 3) hideCablePopoverNow();
   dom.stepBanner.textContent = `Step ${n} of 11 — ${STEP_NAMES[n - 1]}`;
   renderDots();
   if (state.patronKey === "carol" && !state.awaitingEligibility) {
@@ -331,6 +334,7 @@ function resetProcedureUI() {
   dom.dialogueNext.hidden = true;
   dom.eligibilityCard.hidden = true;
   dom.eligibilityToast.hidden = true;
+  hideCablePopoverNow();
   SFX.whirStop();
   state.rewound = false;
   state.yellowSeated = false;
@@ -464,6 +468,35 @@ dom.cableBundle.querySelectorAll(".cable-jack").forEach((jack) => {
     const done = [...all].every((j) => j.classList.contains("confirmed"));
     if (done && state.yellowSeated) setStep(4);
   });
+});
+
+// ---- cable hookup-guide popover (hover on desktop, tap on touch) ----
+let cablePopTimer = null;
+function showCablePopover() {
+  if (state.step !== 3 || state.patronKey !== "carol") return;
+  clearTimeout(cablePopTimer);
+  dom.cablePopover.hidden = false;
+}
+function hideCablePopoverSoon() {
+  clearTimeout(cablePopTimer);
+  cablePopTimer = setTimeout(() => { dom.cablePopover.hidden = true; }, 250);
+}
+function hideCablePopoverNow() {
+  clearTimeout(cablePopTimer);
+  dom.cablePopover.hidden = true;
+}
+dom.cableArea.addEventListener("mouseenter", showCablePopover);
+dom.cableArea.addEventListener("mouseleave", hideCablePopoverSoon);
+dom.cablePopover.addEventListener("mouseenter", showCablePopover);
+dom.cablePopover.addEventListener("mouseleave", hideCablePopoverSoon);
+dom.cableArea.addEventListener("click", (e) => {
+  if (e.target.closest(".cable-jack")) return;
+  showCablePopover();
+});
+dom.cablePopoverClose.addEventListener("click", (e) => {
+  e.stopPropagation();
+  SFX.click();
+  hideCablePopoverNow();
 });
 
 function seatAllCables() {
