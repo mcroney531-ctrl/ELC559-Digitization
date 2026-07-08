@@ -11,13 +11,23 @@
 <div class="canvas" id="canvas">
   <div class="scanlines"></div>
 
-  <!-- SCENE 0: INTRO -->
+  <button class="sfx-toggle" id="sfx-toggle" type="button" aria-label="Toggle sound effects">SOUND: ON</button>
+
+  <!-- SCENE 0: INTRO (styled as a VHS cassette sleeve) -->
   <section class="scene active" id="scene-intro">
-    <div class="intro-card">
+    <div class="vhs-sleeve">
+      <div class="sleeve-band">
+        <span class="sleeve-genre">TRAINING FEATURE</span>
+        <span class="sleeve-runtime">RUN TIME: ONE SHIFT</span>
+      </div>
       <h1>Media Digitization Desk</h1>
       <p class="intro-sub">Maple Street Public Library</p>
       <p class="intro-body">Patrons can have personal home videos digitized for free — subject to library copyright policy. Run the equipment, greet your patrons, and use good judgment.</p>
-      <button class="btn-primary" id="btn-start">Start Shift</button>
+      <div class="sleeve-chips">
+        <span>SLP 0:30</span><span>HI-FI STEREO</span><span>MAPLE ST. BRANCH</span>
+      </div>
+      <button class="btn-primary" id="btn-start"><span class="icon-tri-right"></span> Start Shift</button>
+      <div class="sleeve-barcode"></div>
     </div>
   </section>
 
@@ -29,6 +39,23 @@
     <div class="desk">
       <div class="spotlight-overlay" id="spotlight-overlay" hidden></div>
 
+      <!-- environment dressing -->
+      <div class="wall-sign">
+        <span class="wall-sign-chain left"></span><span class="wall-sign-chain right"></span>
+        Media Digitization Desk
+      </div>
+      <div class="wall-poster">
+        <strong>PERSONAL<br>RECORDINGS<br>ONLY</strong>
+        <em>Library copyright policy applies — ask us why!</em>
+      </div>
+      <div class="tape-shelf">
+        <div class="shelf-row"></div>
+        <div class="shelf-row"></div>
+        <div class="shelf-row"></div>
+      </div>
+      <div class="desk-mug"></div>
+      <div class="monitor-glow"></div>
+
       <div class="callout-card" id="callout-card" hidden>
         <div class="callout-title" id="callout-title">Step 1 of 11</div>
         <p class="callout-instruction" id="callout-instruction"></p>
@@ -36,15 +63,22 @@
         <button class="callout-next" id="callout-next" type="button">Next Step &rsaquo;</button>
       </div>
 
-      <div class="tape-waiting" id="tape-waiting">
-        <div class="tape-waiting-label" id="tape-waiting-label">Carol's Graduation<br>Ridgeline University, 1998</div>
+      <button class="tape-waiting" id="tape-waiting" type="button">
+        <span class="tape-waiting-label" id="tape-waiting-label">Carol's Graduation<br>Ridgeline University, 1998</span>
+      </button>
+
+      <div class="claim-ticket" id="claim-ticket" hidden>
+        <strong>CLAIM TICKET</strong>
+        <span id="claim-ticket-line">Nº 0047 — WHITFIELD</span>
       </div>
 
       <div class="vcr" id="vcr">
+        <div class="vcr-brand">MAPLEWOOD <b>VX-2000</b></div>
         <div class="vcr-slot" id="vcr-slot">
           <div class="tape" id="tape-graphic">
             <div class="tape-label" id="tape-label">Carol's Graduation<br>Ridgeline University, 1998</div>
           </div>
+          <div class="vcr-slot-sheen"></div>
         </div>
         <div class="vcr-display"><span id="tape-counter">----</span></div>
         <div class="vcr-buttons">
@@ -52,19 +86,41 @@
           <button class="vcr-btn" id="btn-play" title="Play"><span class="icon-tri-right"></span></button>
           <button class="vcr-btn" id="btn-power-vcr" title="Power"><span class="icon-power"></span></button>
         </div>
+        <div class="vcr-led" id="vcr-led"></div>
+        <div class="vcr-grille"></div>
       </div>
 
-      <div class="cable-bundle" id="cable-bundle">
-        <div class="cable-jack yellow" data-cable="video"></div>
-        <div class="cable-jack white" data-cable="audio-l"></div>
-        <div class="cable-jack red" data-cable="audio-r"></div>
+      <!-- cable run: VCR -> capture device -> computer -->
+      <div class="cable-area" id="cable-area">
+        <svg viewBox="0 0 460 290" preserveAspectRatio="none" aria-hidden="true">
+          <!-- USB out to monitor (decorative) -->
+          <path d="M 350 155 C 385 155, 400 172, 425 172" fill="none" stroke="#3a3a40" stroke-width="7" stroke-linecap="round"/>
+          <!-- white + red, already seated -->
+          <path d="M 18 168 C 95 176, 145 138, 208 147" fill="none" stroke="#eae6dc" stroke-width="6" stroke-linecap="round"/>
+          <path d="M 18 190 C 100 202, 150 176, 208 182" fill="none" stroke="#b5342a" stroke-width="6" stroke-linecap="round"/>
+          <!-- yellow: two states -->
+          <g class="yellow-loose-path">
+            <path d="M 18 148 C 80 148, 130 150, 168 205 " fill="none" stroke="#e0b400" stroke-width="6" stroke-linecap="round"/>
+            <rect x="160" y="200" width="22" height="12" rx="3" transform="rotate(38 171 206)" fill="#c9a200" stroke="#5c4a00"/>
+          </g>
+          <g class="yellow-seated-path">
+            <path d="M 18 148 C 90 148, 140 102, 208 112" fill="none" stroke="#e0b400" stroke-width="6" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <div class="cable-bundle" id="cable-bundle">
+          <button class="cable-jack yellow unseated" data-cable="video" type="button" title="Video (yellow)"></button>
+          <button class="cable-jack white" data-cable="audio-l" type="button" title="Audio L (white)"></button>
+          <button class="cable-jack red" data-cable="audio-r" type="button" title="Audio R (red)"></button>
+        </div>
       </div>
 
       <div class="capture-box" id="capture-box">
+        <div class="capture-led" id="capture-led"></div>
         <span class="capture-label" id="capture-power-label">ClipCatch</span>
       </div>
 
       <div class="monitor" id="monitor">
+        <div class="monitor-sticky"></div>
         <div class="monitor-screen" id="monitor-screen">
           <div class="desktop-view" id="desktop-view">
             <div class="desktop-icon" data-icon="correct"><span class="app-glyph app-glyph-video"></span><span>ClipCatch</span></div>
@@ -81,35 +137,106 @@
                 <option value="svideo-pal">S-Video In — PAL</option>
                 <option value="hdmi">HDMI In</option>
               </select>
-              <div class="software-preview" id="software-preview"></div>
+              <div class="software-preview" id="software-preview">
+                <div class="preview-picture" id="preview-picture">
+                  <span class="preview-osd">PLAY &#9654;</span>
+                  <span class="rec-dot" id="rec-dot" hidden></span>
+                </div>
+                <div class="preview-noise" id="preview-noise"></div>
+              </div>
               <input type="range" id="tracking-slider" min="0" max="100" value="0" hidden>
               <div class="progress-track" id="progress-track" hidden><div class="progress-fill" id="progress-fill"></div></div>
               <div class="software-controls">
                 <button id="btn-record" class="sw-btn record"><span class="icon-circle"></span> Record</button>
-                <button id="btn-stop-capture" class="sw-btn" hidden><span class="icon-square"></span> Stop</button>
+                <button id="btn-stop-capture" class="sw-btn" hidden disabled><span class="icon-square"></span> Stop</button>
                 <input type="text" id="filename-field" class="filename-field" hidden readonly>
                 <button id="btn-save" class="sw-btn" hidden>Save</button>
               </div>
             </div>
           </div>
         </div>
+        <div class="monitor-led"></div>
       </div>
     </div>
 
+    <!-- Carol's eligibility micro-decision (Beat 1.1) -->
+    <div class="eligibility-card" id="eligibility-card" hidden>
+      <p class="eligibility-q">Carol's tape is her own recording of her graduation. Is it eligible for duplication?</p>
+      <div class="eligibility-btns">
+        <button class="elig-btn" data-elig="yes" type="button">Yes — it's her personal recording</button>
+        <button class="elig-btn" data-elig="unsure" type="button">Not sure — ask a supervisor</button>
+      </div>
+      <p class="eligibility-toast" id="eligibility-toast" hidden></p>
+    </div>
+
     <div class="dialogue-strip" id="dialogue-strip">
-      <div class="dialogue-avatar" id="dialogue-avatar">C</div>
-      <div class="dialogue-text" id="dialogue-text"></div>
+      <div class="dialogue-avatar" id="dialogue-avatar">
+        <svg id="avatar-carol" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="48" fill="#ffb347"/>
+          <path d="M20 100 Q22 70 50 70 Q78 70 80 100 Z" fill="#1f6f78"/>
+          <circle cx="50" cy="46" r="24" fill="#f0c9a8"/>
+          <path d="M26 44 Q26 20 50 20 Q74 20 74 44 L70 40 Q68 26 50 26 Q32 26 30 40 Z" fill="#cfcac2"/>
+          <circle cx="50" cy="16" r="10" fill="#cfcac2"/>
+          <circle cx="41" cy="46" r="7" fill="none" stroke="#5c3a1e" stroke-width="2.5"/>
+          <circle cx="59" cy="46" r="7" fill="none" stroke="#5c3a1e" stroke-width="2.5"/>
+          <line x1="48" y1="46" x2="52" y2="46" stroke="#5c3a1e" stroke-width="2.5"/>
+          <path d="M43 60 Q50 66 57 60" fill="none" stroke="#a05c3a" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <svg id="avatar-gary" viewBox="0 0 100 100" aria-hidden="true" hidden>
+          <circle cx="50" cy="50" r="48" fill="#2f9aa6"/>
+          <path d="M20 100 Q22 72 50 72 Q78 72 80 100 Z" fill="#7a3b2e"/>
+          <circle cx="50" cy="48" r="24" fill="#e8b68d"/>
+          <path d="M26 40 Q28 20 50 20 Q72 20 74 40 Z" fill="#27415c"/>
+          <rect x="22" y="37" width="44" height="7" rx="3" fill="#1b2f44"/>
+          <circle cx="42" cy="50" r="3" fill="#3a2a1a"/>
+          <circle cx="58" cy="50" r="3" fill="#3a2a1a"/>
+          <path d="M40 62 Q50 58 60 62 Q50 68 40 62 Z" fill="#5c4632"/>
+        </svg>
+      </div>
+      <div class="dialogue-main">
+        <div class="dialogue-name" id="dialogue-name">CAROL</div>
+        <div class="dialogue-text" id="dialogue-text"></div>
+      </div>
       <button class="dialogue-next" id="dialogue-next" hidden>&rsaquo;</button>
     </div>
   </section>
 
+  <!-- WARNING REVEAL OVERLAY (Gary's tape) -->
+  <div class="warning-overlay" id="warning-overlay" hidden>
+    <div class="wo-screen">
+      <div class="wo-static" id="wo-static"></div>
+      <div class="wo-fbi" id="wo-fbi" hidden>
+        <div class="wo-fbi-inner">
+          <div class="wo-seal">&#9733;</div>
+          <h3>WARNING</h3>
+          <p>UNAUTHORIZED REPRODUCTION OF THIS RECORDING IS PROHIBITED</p>
+          <small>Violators subject to penalties under applicable law</small>
+        </div>
+      </div>
+      <div class="wo-title" id="wo-title" hidden>
+        <span class="wo-bug">HN &#10022;</span>
+        <div class="wo-podium">
+          <span class="wo-speaker"></span>
+        </div>
+        <h3>AMERICAN VOICES</h3>
+        <p class="wo-subtitle">Great Speeches of Our Time</p>
+        <p class="wo-network">A HERITAGE NETWORK SPECIAL</p>
+        <div class="wo-lower-third">DR. ELEANOR VANCE &mdash; COMMENCEMENT ADDRESS, 1998</div>
+      </div>
+    </div>
+    <p class="wo-caption" id="wo-caption" hidden>Wait &mdash; this doesn't look like a home recording&hellip;</p>
+    <button class="btn-primary" id="btn-pause-think" hidden>Pause and think</button>
+  </div>
+
   <!-- SCENE 2: DECISION -->
   <section class="scene" id="scene-decision">
-    <p class="decision-prompt" id="decision-prompt">This tape isn't Gary's personal footage — it's a copy of a copyrighted broadcast special. What do you do?</p>
+    <div class="decision-memo">
+      <p class="decision-prompt" id="decision-prompt">This tape isn't Gary's personal footage — it's a copy of a copyrighted broadcast special. What do you do?</p>
+    </div>
     <div class="decision-choices" id="decision-choices">
-      <button class="choice-card" data-choice="a">"Sure, no problem." <br><small>Duplicate it anyway.</small></button>
-      <button class="choice-card" data-choice="b">"No, sorry, can't do it." <br><small>Flat refusal, no explanation.</small></button>
-      <button class="choice-card" data-choice="c">"This looks like it might be copyrighted — let me explain and see if there's another option." <br><small>Explain the policy and offer an alternative.</small></button>
+      <button class="choice-card" data-choice="a"><span class="choice-quote">&ldquo;Sure, no problem.&rdquo;</span><small>Duplicate it anyway.</small></button>
+      <button class="choice-card" data-choice="b"><span class="choice-quote">&ldquo;No, sorry, can't do it.&rdquo;</span><small>Flat refusal, no explanation.</small></button>
+      <button class="choice-card" data-choice="c"><span class="choice-quote">&ldquo;This looks like it might be copyrighted &mdash; let me explain and see if there's another option.&rdquo;</span><small>Explain the policy and offer an alternative.</small></button>
     </div>
     <div class="consequence-box" id="consequence-box" hidden>
       <p id="consequence-text"></p>
@@ -119,12 +246,18 @@
 
   <!-- SCENE 3: REFLECTION -->
   <section class="scene" id="scene-reflection">
-    <h2>Shift complete.</h2>
-    <p id="reflection-line"></p>
-    <div class="policy-box">
-      <strong>Why this policy exists:</strong> A personal home recording belongs to the person who filmed it — there's no copyright issue in duplicating it for them. A recording of broadcast or commercial programming is copyrighted material owned by someone else — duplicating it, even for a patron's personal use, isn't legally allowed without permission from the rights holder.
+    <div class="shift-report">
+      <div class="report-header">
+        <h2>Shift Report</h2>
+        <span class="report-stamp" id="reflection-stamp"></span>
+      </div>
+      <p class="report-base">Today you helped two patrons digitize personal media — and ran into a common real-world wrinkle: not everything that <em>looks</em> like a home recording actually is one.</p>
+      <p id="reflection-line"></p>
+      <div class="policy-box">
+        <strong>Why this policy exists:</strong> A personal home recording belongs to the person who filmed it — there's no copyright issue in duplicating it for them. A recording of broadcast or commercial programming is copyrighted material owned by someone else — duplicating it, even for a patron's personal use, isn't legally allowed without permission from the rights holder.
+      </div>
+      <button class="btn-primary" id="btn-finish">Finish</button>
     </div>
-    <button class="btn-primary" id="btn-finish">Finish</button>
   </section>
 
 </div>
