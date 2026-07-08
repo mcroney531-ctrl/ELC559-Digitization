@@ -83,7 +83,7 @@
             <rect x="150" y="107" width="30" height="16" rx="3" fill="#9c2c22" stroke="#4a120c"/>
           </g>
         </svg>
-        <p>Match each plug to its color &mdash; yellow to video, white and red to audio. Click each cable on the desk once you've confirmed it's seated in the right port.</p>
+        <p>Match each plug to its color &mdash; yellow to video, white and red to audio. Click each outlet on the desk once you've confirmed its cable is seated in the right port.</p>
         <button class="callout-next" id="cable-popover-close" type="button">Got it</button>
       </div>
 
@@ -125,23 +125,16 @@
       <div class="cable-area" id="cable-area">
         <svg viewBox="0 0 460 290" preserveAspectRatio="none" aria-hidden="true">
           <!-- USB out to monitor (decorative) -->
-          <path d="M 350 155 C 385 155, 400 172, 425 172" fill="none" stroke="#3a3a40" stroke-width="7" stroke-linecap="round"/>
-          <!-- white + red, already seated -->
-          <path d="M 18 168 C 95 176, 145 138, 208 147" fill="none" stroke="#eae6dc" stroke-width="6" stroke-linecap="round"/>
-          <path d="M 18 190 C 100 202, 150 176, 208 182" fill="none" stroke="#b5342a" stroke-width="6" stroke-linecap="round"/>
-          <!-- yellow: two states -->
-          <g class="yellow-loose-path">
-            <path d="M 18 148 C 80 148, 130 150, 168 205 " fill="none" stroke="#e0b400" stroke-width="6" stroke-linecap="round"/>
-            <rect x="160" y="200" width="22" height="12" rx="3" transform="rotate(38 171 206)" fill="#c9a200" stroke="#5c4a00"/>
-          </g>
-          <g class="yellow-seated-path">
-            <path d="M 18 148 C 90 148, 140 102, 208 112" fill="none" stroke="#e0b400" stroke-width="6" stroke-linecap="round"/>
-          </g>
+          <path class="cable-line cable-usb" d="M 350 155 C 385 155, 400 172, 425 172" fill="none" stroke="#3a3a40" stroke-width="7" stroke-linecap="round"/>
+          <!-- all three seated in their ports -->
+          <path class="cable-line cable-y" d="M 18 148 C 90 148, 140 102, 208 112" fill="none" stroke="#e0b400" stroke-width="6" stroke-linecap="round"/>
+          <path class="cable-line cable-w" d="M 18 168 C 95 176, 145 138, 208 147" fill="none" stroke="#eae6dc" stroke-width="6" stroke-linecap="round"/>
+          <path class="cable-line cable-r" d="M 18 190 C 100 202, 150 176, 208 182" fill="none" stroke="#b5342a" stroke-width="6" stroke-linecap="round"/>
         </svg>
         <div class="cable-bundle" id="cable-bundle">
-          <button class="cable-jack yellow unseated" data-cable="video" type="button" title="Video (yellow)"></button>
-          <button class="cable-jack white" data-cable="audio-l" type="button" title="Audio L (white)"></button>
-          <button class="cable-jack red" data-cable="audio-r" type="button" title="Audio R (red)"></button>
+          <button class="cable-jack yellow" data-cable="y" type="button" title="Video (yellow)"></button>
+          <button class="cable-jack white" data-cable="w" type="button" title="Audio L (white)"></button>
+          <button class="cable-jack red" data-cable="r" type="button" title="Audio R (red)"></button>
         </div>
       </div>
 

@@ -15,7 +15,7 @@ const STEP_NAMES = [
 const STEP_COPY = [
   { instruction: "Click the tape sitting on the desk to load it into the VCR.", tip: "Make sure the label faces up — it should slide in smoothly." },
   { instruction: "Press Rewind to confirm the tape is cued to the very beginning.", tip: "Never assume a tape's already rewound — always check first." },
-  { instruction: "One cable has come loose — click it back into its port, then confirm the other two.", tip: "Hover or tap the cable run for a hookup guide — yellow is video, white/red are audio." },
+  { instruction: "Check each cord against its port, then click each outlet to confirm it's seated in the right spot.", tip: "Hover or tap the cable run for a hookup guide — yellow is video, white/red are audio." },
   { instruction: "Power on both the VCR and the capture device.", tip: "Both units need power before the software can see a signal." },
   { instruction: "Open the capture software from the desktop.", tip: "Look for the ClipCatch icon — not Mail, Photos, or the browser." },
   { instruction: "Select the correct input source and video format.", tip: "Composite In + NTSC is the standard for home VHS tapes." },
@@ -144,7 +144,6 @@ const state = {
   step: 1,
   awaitingEligibility: false,
   rewound: false,
-  yellowSeated: false,
   vcrPowered: false,
   capturePowered: false,
   recordClicked: false,
@@ -241,6 +240,7 @@ function showScene(id) {
 function setStep(n) {
   state.step = n;
   if (n !== 3) hideCablePopoverNow();
+  if (n === 3 && state.patronKey === "carol") dom.cableArea.classList.add("checking");
   dom.stepBanner.textContent = `Step ${n} of 11 — ${STEP_NAMES[n - 1]}`;
   renderDots();
   if (state.patronKey === "carol" && !state.awaitingEligibility) {
@@ -310,9 +310,8 @@ function resetProcedureUI() {
   dom.captureBox.classList.remove("active-glow");
   dom.vcrLed.classList.remove("on");
   dom.captureLed.classList.remove("rec");
-  dom.cableArea.classList.remove("yellow-seated");
+  dom.cableArea.classList.remove("checking", "y-ok", "w-ok", "r-ok");
   dom.cableBundle.querySelectorAll(".cable-jack").forEach((j) => j.classList.remove("confirmed"));
-  dom.cableBundle.querySelector(".cable-jack.yellow").classList.add("unseated");
   dom.desktopView.hidden = false;
   dom.softwareWindow.hidden = true;
   dom.inputSelect.value = "";
@@ -339,7 +338,6 @@ function resetProcedureUI() {
   hideCablePopoverNow();
   SFX.whirStop();
   state.rewound = false;
-  state.yellowSeated = false;
   state.vcrPowered = false;
   state.capturePowered = false;
   state.recordClicked = false;
@@ -453,22 +451,21 @@ dom.btnRewind.addEventListener("click", () => {
   }, 120);
 });
 
-// ---- Step 3: Cables (yellow starts loose — seat it, confirm the rest) ----
+// ---- Step 3: Cables (all connected but dimmed — click each outlet to
+// confirm it's in the right port; the cord lights up and the outlet checks) ----
 dom.cableBundle.querySelectorAll(".cable-jack").forEach((jack) => {
   jack.addEventListener("click", () => {
-    if (state.step !== 3) return;
-    if (jack.classList.contains("unseated")) {
-      SFX.clunk();
-      jack.classList.remove("unseated");
-      dom.cableArea.classList.add("yellow-seated");
-      state.yellowSeated = true;
-    } else {
-      SFX.click();
-    }
+    if (state.step !== 3 || jack.classList.contains("confirmed")) return;
+    SFX.click();
     jack.classList.add("confirmed");
+    dom.cableArea.classList.add(`${jack.dataset.cable}-ok`);
     const all = dom.cableBundle.querySelectorAll(".cable-jack");
     const done = [...all].every((j) => j.classList.contains("confirmed"));
-    if (done && state.yellowSeated) setStep(4);
+    if (done) {
+      SFX.chime();
+      dom.cableArea.classList.remove("checking");
+      setStep(4);
+    }
   });
 });
 
@@ -501,13 +498,10 @@ dom.cablePopoverClose.addEventListener("click", (e) => {
   hideCablePopoverNow();
 });
 
-function seatAllCables() {
-  dom.cableArea.classList.add("yellow-seated");
-  dom.cableBundle.querySelectorAll(".cable-jack").forEach((j) => {
-    j.classList.remove("unseated");
-    j.classList.add("confirmed");
-  });
-  state.yellowSeated = true;
+function confirmAllCables() {
+  dom.cableArea.classList.remove("checking");
+  dom.cableArea.classList.add("y-ok", "w-ok", "r-ok");
+  dom.cableBundle.querySelectorAll(".cable-jack").forEach((j) => j.classList.add("confirmed"));
 }
 
 // ---- Step 4: Power ----
@@ -673,7 +667,7 @@ function fastForwardTo(targetStep) {
     state.rewound = true;
   }
   if (targetStep >= 4) {
-    seatAllCables();
+    confirmAllCables();
   }
   if (targetStep >= 5) {
     state.vcrPowered = true;
@@ -734,7 +728,7 @@ function runGaryMontage() {
     setStep(2);
   }, 400);
   setTimeout(() => {
-    seatAllCables();
+    confirmAllCables();
   }, 750);
   setTimeout(() => {
     state.vcrPowered = true;

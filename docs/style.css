@@ -606,9 +606,14 @@ button { font-family: inherit; }
   z-index: 9;
 }
 .cable-area svg { width: 100%; height: 100%; display: block; }
-.cable-area .yellow-seated-path { display: none; }
-.cable-area.yellow-seated .yellow-loose-path { display: none; }
-.cable-area.yellow-seated .yellow-seated-path { display: block; }
+.cable-line { transition: opacity 0.3s, filter 0.3s; }
+/* checking mode: everything dims until each outlet is confirmed */
+.cable-area.checking .cable-y,
+.cable-area.checking .cable-w,
+.cable-area.checking .cable-r { opacity: 0.28; }
+.cable-area.y-ok .cable-y { opacity: 1; filter: drop-shadow(0 0 6px #e0b400); }
+.cable-area.w-ok .cable-w { opacity: 1; filter: drop-shadow(0 0 6px #eae6dc); }
+.cable-area.r-ok .cable-r { opacity: 1; filter: drop-shadow(0 0 6px #b5342a); }
 
 .cable-bundle {
   position: absolute;
@@ -624,20 +629,26 @@ button { font-family: inherit; }
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 0 0 4px rgba(0,0,0,0.35);
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s, box-shadow 0.3s;
 }
 .cable-jack.yellow { top: 13px; background: var(--cable-yellow); }
 .cable-jack.white { top: 48px; background: var(--cable-white); }
 .cable-jack.red { top: 83px; background: var(--cable-red); }
-.cable-jack.yellow.unseated {
-  background: #14100a;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 0 0 3px var(--amber), 0 0 14px var(--amber);
-  animation: jack-pulse 1.4s ease-in-out infinite;
+.cable-area.checking .cable-jack:not(.confirmed) { opacity: 0.45; }
+.cable-jack.confirmed {
+  opacity: 1;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 0 12px rgba(255,255,255,0.35);
 }
-@keyframes jack-pulse {
-  0%, 100% { box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 0 0 3px var(--amber), 0 0 10px var(--amber); }
-  50% { box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 0 0 3px var(--amber), 0 0 24px var(--amber); }
+.cable-jack.confirmed::after {
+  content: "\2713";
+  font-size: 17px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 3px #000, 0 1px 2px #000;
 }
-.cable-jack.confirmed { outline: 3px solid var(--teal-light); outline-offset: 2px; }
 
 /* ---------- cable hookup-guide popover ---------- */
 .cable-popover {
