@@ -223,7 +223,7 @@ const STEP_TARGETS = {
   1: () => [dom.tapeWaiting],
   2: () => [dom.vcr],
   3: () => [dom.cableArea],
-  4: () => [dom.btnPowerVcr, dom.captureBox],
+  4: () => [dom.vcr, dom.captureBox],
   5: () => [dom.monitor],
   6: () => [dom.monitor],
   7: () => [dom.monitor],
@@ -274,10 +274,14 @@ function updateSpotlight(step) {
   const targets = (STEP_TARGETS[step] ? STEP_TARGETS[step]() : []).filter(Boolean);
   targets.forEach((t) => t.classList.add("spotlight-active"));
   dom.spotlightOverlay.hidden = targets.length === 0;
+  // Step 4 spotlights the whole VCR; also pulse a square just around its
+  // power button until the VCR itself is powered on.
+  dom.btnPowerVcr.classList.toggle("vcr-power-pulse", step === 4 && !state.vcrPowered);
 }
 
 function hideSpotlight() {
   document.querySelectorAll(".spotlight-active").forEach((node) => node.classList.remove("spotlight-active"));
+  dom.btnPowerVcr.classList.remove("vcr-power-pulse");
   dom.spotlightOverlay.hidden = true;
 }
 
@@ -307,6 +311,7 @@ function resetProcedureUI() {
   dom.claimTicket.hidden = true;
   dom.btnRewind.classList.remove("active-glow");
   dom.btnPowerVcr.classList.remove("active-glow");
+  dom.btnPowerVcr.classList.remove("vcr-power-pulse");
   dom.captureBox.classList.remove("active-glow");
   dom.vcrLed.classList.remove("on");
   dom.captureLed.classList.remove("rec");
@@ -518,6 +523,7 @@ dom.btnPowerVcr.addEventListener("click", () => {
   SFX.click();
   state.vcrPowered = true;
   dom.btnPowerVcr.classList.add("active-glow");
+  dom.btnPowerVcr.classList.remove("vcr-power-pulse");
   dom.vcrLed.classList.add("on");
   checkPower();
 });
