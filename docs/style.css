@@ -747,11 +747,15 @@ button { font-family: inherit; }
   width: 660px;
   background: #f7f5ef;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-top: 4px solid var(--amber);
   border-radius: 10px;
-  padding: 22px 28px 24px;
+  padding: 0 28px 24px;
   z-index: 52;
   box-shadow: 0 14px 30px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.5);
+  overflow: hidden;
+}
+.eligibility-card .callout-title {
+  margin: 0 -28px 16px;
+  padding: 10px 28px 8px;
 }
 .eligibility-card[hidden] { display: none; }
 .eligibility-q {
@@ -1185,18 +1189,22 @@ button { font-family: inherit; }
   z-index: 52;
   background: #f7f5ef;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-top: 4px solid var(--amber);
   border-radius: 10px;
-  padding: 20px 26px;
+  padding: 0 26px 20px;
   box-shadow: 0 14px 30px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.5);
+  overflow: hidden;
 }
 .callout-card[hidden] { display: none; }
+/* attached navy banner strip across the top of the instruction boxes */
 .callout-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
-  letter-spacing: 1px;
-  color: var(--amber-dark);
-  margin-bottom: 8px;
+  font-size: 21px;
+  letter-spacing: 2px;
+  color: var(--cream);
+  background: linear-gradient(180deg, var(--navy), var(--navy-dark));
+  border-bottom: 3px solid var(--amber);
+  margin: 0 -26px 14px;
+  padding: 10px 26px 8px;
 }
 .callout-instruction {
   font-size: 18px;
