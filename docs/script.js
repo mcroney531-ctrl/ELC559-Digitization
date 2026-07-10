@@ -274,8 +274,17 @@ function renderDots() {
 
 function updateSpotlight(step) {
   document.querySelectorAll(".spotlight-active").forEach((node) => node.classList.remove("spotlight-active"));
+  document.querySelectorAll(".spotlight-lift").forEach((node) => node.classList.remove("spotlight-lift"));
   const targets = (STEP_TARGETS[step] ? STEP_TARGETS[step]() : []).filter(Boolean);
-  targets.forEach((t) => t.classList.add("spotlight-active"));
+  targets.forEach((t) => {
+    t.classList.add("spotlight-active");
+    // A button nested inside the VCR or capture box is trapped in that
+    // panel's stacking context (below the dark overlay), so its z-index
+    // alone can't light it. Lift the panel above the overlay; it gets its
+    // own scrim (see .spotlight-lift) so only the button reads as lit.
+    const trap = t.closest(".vcr, .monitor, .capture-box");
+    if (trap && trap !== t) trap.classList.add("spotlight-lift");
+  });
   dom.spotlightOverlay.hidden = targets.length === 0;
   // Step 4 spotlights the whole VCR; also pulse a square just around its
   // power button until the VCR itself is powered on.
@@ -284,6 +293,7 @@ function updateSpotlight(step) {
 
 function hideSpotlight() {
   document.querySelectorAll(".spotlight-active").forEach((node) => node.classList.remove("spotlight-active"));
+  document.querySelectorAll(".spotlight-lift").forEach((node) => node.classList.remove("spotlight-lift"));
   dom.btnPowerVcr.classList.remove("vcr-power-pulse");
   dom.spotlightOverlay.hidden = true;
 }

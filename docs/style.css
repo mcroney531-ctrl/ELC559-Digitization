@@ -1190,6 +1190,20 @@ button { font-family: inherit; }
 .sw-btn.spotlight-active {
   position: relative;
 }
+/* Lift a panel that traps a spotlit control in its own stacking context so
+   the control can rise above the overlay, then re-darken the panel with a
+   matching scrim so only the spotlit control (z-index 20) reads as lit. */
+.vcr.spotlight-lift,
+.monitor.spotlight-lift,
+.capture-box.spotlight-lift { z-index: 16; }
+.spotlight-lift::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.68);
+  z-index: 15;
+  pointer-events: none;
+}
 
 .callout-card {
   position: absolute;
