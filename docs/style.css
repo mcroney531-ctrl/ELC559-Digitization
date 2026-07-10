@@ -443,7 +443,7 @@ button { font-family: inherit; }
 }
 .cable-jack {
   position: absolute;
-  left: 20px;
+  left: 38px;
   width: 26px; height: 26px;
   border-radius: 50%;
   border: 2px solid #000;
@@ -455,9 +455,9 @@ button { font-family: inherit; }
   justify-content: center;
   transition: opacity 0.3s, box-shadow 0.3s;
 }
-.cable-jack.yellow { top: 8px; background: var(--cable-yellow); }
-.cable-jack.white { top: 49px; background: var(--cable-white); }
-.cable-jack.red { top: 104px; background: var(--cable-red); }
+.cable-jack.yellow { top: 21px; background: var(--cable-yellow); }
+.cable-jack.white { top: 72px; background: var(--cable-white); }
+.cable-jack.red { left: 41px; top: 121px; background: var(--cable-red); }
 .cable-area.checking .cable-jack:not(.confirmed) {
   animation: jack-pulse 1.3s ease-in-out infinite;
 }
