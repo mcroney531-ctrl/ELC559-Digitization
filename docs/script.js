@@ -242,6 +242,7 @@ function setStep(n) {
   if (n !== 3) hideCablePopoverNow();
   if (n === 3 && state.patronKey === "carol") dom.cableArea.classList.add("checking");
   dom.stepBanner.textContent = `Step ${n} of 11 — ${STEP_NAMES[n - 1]}`;
+  dom.tapeWaiting.classList.toggle("floating", n === 1 && state.patronKey === "carol" && !state.awaitingEligibility);
   renderDots();
   if (state.patronKey === "carol" && !state.awaitingEligibility) {
     updateSpotlight(n);
@@ -309,7 +310,7 @@ function flashWrong(node) {
 
 function resetProcedureUI() {
   dom.tapeGraphic.classList.remove("inserted");
-  dom.tapeWaiting.classList.remove("used");
+  dom.tapeWaiting.classList.remove("used", "floating");
   dom.claimTicket.hidden = true;
   dom.btnRewind.classList.remove("active-glow");
   dom.btnPowerVcr.classList.remove("active-glow");
