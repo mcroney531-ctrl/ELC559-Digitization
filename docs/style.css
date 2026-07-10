@@ -431,11 +431,11 @@ button { font-family: inherit; }
 /* ---------- cable confirm-outlet targets over the scene's cable run ---------- */
 .cable-area {
   position: absolute;
-  left: 795px; top: 675px;
-  width: 110px; height: 120px;
+  left: 810px; top: 640px;
+  width: 90px; height: 150px;
   z-index: 9;
 }
-.cable-area.spotlight-active { background-position: -795px -865px; }
+.cable-area.spotlight-active { background-position: -810px -830px; }
 
 .cable-bundle {
   position: absolute;
@@ -443,7 +443,7 @@ button { font-family: inherit; }
 }
 .cable-jack {
   position: absolute;
-  left: 30px;
+  left: 20px;
   width: 26px; height: 26px;
   border-radius: 50%;
   border: 2px solid #000;
@@ -455,9 +455,9 @@ button { font-family: inherit; }
   justify-content: center;
   transition: opacity 0.3s, box-shadow 0.3s;
 }
-.cable-jack.yellow { top: 18px; background: var(--cable-yellow); }
-.cable-jack.white { top: 50px; background: var(--cable-white); }
-.cable-jack.red { top: 82px; background: var(--cable-red); }
+.cable-jack.yellow { top: 8px; background: var(--cable-yellow); }
+.cable-jack.white { top: 49px; background: var(--cable-white); }
+.cable-jack.red { top: 104px; background: var(--cable-red); }
 .cable-area.checking .cable-jack:not(.confirmed) {
   animation: jack-pulse 1.3s ease-in-out infinite;
 }
@@ -578,8 +578,8 @@ button { font-family: inherit; }
 /* ---------- monitor screen overlay (bezel/stand are in the scene photo) ---------- */
 .monitor {
   position: absolute;
-  left: 1132px; top: 168px;
-  width: 724px; height: 544px;
+  left: 1128px; top: 156px;
+  width: 735px; height: 570px;
   z-index: 8;
 }
 .monitor-screen {
