@@ -578,8 +578,8 @@ button { font-family: inherit; }
 /* ---------- monitor screen overlay (bezel/stand are in the scene photo) ---------- */
 .monitor {
   position: absolute;
-  left: 1128px; top: 156px;
-  width: 735px; height: 570px;
+  left: 1150px; top: 156px;
+  width: 713px; height: 596px;
   z-index: 8;
 }
 .monitor-screen {
