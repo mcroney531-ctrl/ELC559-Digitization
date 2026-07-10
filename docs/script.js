@@ -844,9 +844,15 @@ dom.btnJump.addEventListener("click", () => {
 const CANVAS_W = 1980;
 const CANVAS_H = 1020;
 function fitCanvas() {
-  const scale = Math.min(window.innerWidth / CANVAS_W, window.innerHeight / CANVAS_H);
-  const left = (window.innerWidth - CANVAS_W * scale) / 2;
-  const top = (window.innerHeight - CANVAS_H * scale) / 2;
+  // Use the layout viewport (clientWidth/Height), not innerWidth/Height: on
+  // mobile the 1980px stage inflates window.innerWidth to the overflowing
+  // content width, which made the scene render several times wider than the
+  // screen (start zoomed in, pinch out to see the whole landscape).
+  const vw = document.documentElement.clientWidth || window.innerWidth;
+  const vh = document.documentElement.clientHeight || window.innerHeight;
+  const scale = Math.min(vw / CANVAS_W, vh / CANVAS_H);
+  const left = (vw - CANVAS_W * scale) / 2;
+  const top = (vh - CANVAS_H * scale) / 2;
   dom.canvas.style.transform = `translate(${left}px, ${top}px) scale(${scale})`;
 }
 window.addEventListener("resize", fitCanvas);
