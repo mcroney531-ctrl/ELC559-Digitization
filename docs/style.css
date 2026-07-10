@@ -274,7 +274,7 @@ button { font-family: inherit; }
 /* ---------- tape on desk ---------- */
 .tape-waiting {
   position: absolute;
-  left: 250px; top: 815px;
+  left: 398px; top: 490px;
   width: 300px; height: 52px;
   background: linear-gradient(180deg, #2a2a2a, #131313);
   border: 1px solid #000;
@@ -285,11 +285,19 @@ button { font-family: inherit; }
   cursor: pointer;
   transform: rotate(-2deg);
   box-shadow: 0 6px 14px rgba(0,0,0,0.4), 0 0 0 3px var(--amber), 0 0 16px var(--amber);
-  animation: tape-waiting-pulse 1.6s ease-in-out infinite;
+  animation:
+    tape-waiting-pulse 1.6s ease-in-out infinite,
+    tape-float 3.2s ease-in-out infinite;
   z-index: 11;
   transition: opacity 0.3s, transform 0.3s;
 }
-.tape-waiting.used { opacity: 0; transform: rotate(-2deg) translateY(40px); pointer-events: none; }
+@keyframes tape-float {
+  0%, 100% { transform: rotate(-2deg) translateY(0); }
+  50% { transform: rotate(-2deg) translateY(-9px); }
+}
+/* settle under the cursor so it's easy to click */
+.tape-waiting:hover { animation-play-state: paused; }
+.tape-waiting.used { opacity: 0; transform: rotate(-2deg) translateY(60px); pointer-events: none; animation: none; }
 .tape-waiting[hidden] { display: none; }
 @keyframes tape-waiting-pulse {
   0%, 100% { box-shadow: 0 6px 14px rgba(0,0,0,0.4), 0 0 0 3px var(--amber), 0 0 16px var(--amber); }
