@@ -249,6 +249,8 @@ function setStep(n) {
   } else {
     hideSpotlight();
     hideCallout();
+    // Eligibility beat: keep the same blackout scheme, spotlighting its card.
+    if (state.awaitingEligibility) dom.spotlightOverlay.hidden = false;
   }
 }
 
