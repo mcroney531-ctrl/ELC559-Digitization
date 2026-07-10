@@ -42,23 +42,6 @@
     <div class="desk">
       <div class="spotlight-overlay" id="spotlight-overlay" hidden></div>
 
-      <!-- environment dressing -->
-      <div class="wall-sign">
-        <span class="wall-sign-chain left"></span><span class="wall-sign-chain right"></span>
-        Media Digitization Desk
-      </div>
-      <div class="wall-poster">
-        <strong>PERSONAL<br>RECORDINGS<br>ONLY</strong>
-        <em>Library copyright policy applies — ask us why!</em>
-      </div>
-      <div class="tape-shelf">
-        <div class="shelf-row"></div>
-        <div class="shelf-row"></div>
-        <div class="shelf-row"></div>
-      </div>
-      <div class="desk-mug"></div>
-      <div class="monitor-glow"></div>
-
       <div class="cable-popover" id="cable-popover" hidden>
         <div class="cable-popover-title">Hookup Guide</div>
         <svg class="cable-demo" viewBox="0 0 280 150" aria-hidden="true">
@@ -103,34 +86,22 @@
         <span id="claim-ticket-line">Nº 0047 — WHITFIELD</span>
       </div>
 
+      <!-- interactive overlays (equipment chassis is in the scene photo) -->
       <div class="vcr" id="vcr">
-        <div class="vcr-brand">MAPLEWOOD <b>VX-2000</b></div>
-        <div class="vcr-slot" id="vcr-slot">
-          <div class="tape" id="tape-graphic">
-            <div class="tape-label" id="tape-label">Carol's Graduation<br>Ridgeline University, 1998</div>
-          </div>
-          <div class="vcr-slot-sheen"></div>
+        <div class="tape-slot-label" id="tape-graphic">
+          <span class="tape-label" id="tape-label">Carol's Graduation<br>Ridgeline University, 1998</span>
         </div>
         <div class="vcr-display"><span id="tape-counter">----</span></div>
         <div class="vcr-buttons">
-          <button class="vcr-btn" id="btn-rewind" title="Rewind"><span class="icon-rewind"><span class="icon-tri-left"></span><span class="icon-tri-left"></span></span></button>
-          <button class="vcr-btn" id="btn-play" title="Play"><span class="icon-tri-right"></span></button>
-          <button class="vcr-btn" id="btn-power-vcr" title="Power"><span class="icon-power"></span></button>
+          <button class="vcr-btn" id="btn-rewind" title="Rewind"></button>
+          <button class="vcr-btn" id="btn-play" title="Play"></button>
+          <button class="vcr-btn" id="btn-power-vcr" title="Power"></button>
         </div>
         <div class="vcr-led" id="vcr-led"></div>
-        <div class="vcr-grille"></div>
       </div>
 
-      <!-- cable run: VCR -> capture device -> computer -->
+      <!-- confirm-outlet targets over the scene's cable run -->
       <div class="cable-area" id="cable-area">
-        <svg viewBox="0 0 460 290" preserveAspectRatio="none" aria-hidden="true">
-          <!-- USB out to monitor (decorative) -->
-          <path class="cable-line cable-usb" d="M 350 155 C 385 155, 400 172, 425 172" fill="none" stroke="#3a3a40" stroke-width="7" stroke-linecap="round"/>
-          <!-- all three seated in their ports -->
-          <path class="cable-line cable-y" d="M 18 148 C 90 148, 140 102, 208 112" fill="none" stroke="#e0b400" stroke-width="6" stroke-linecap="round"/>
-          <path class="cable-line cable-w" d="M 18 168 C 95 176, 145 138, 208 147" fill="none" stroke="#eae6dc" stroke-width="6" stroke-linecap="round"/>
-          <path class="cable-line cable-r" d="M 18 190 C 100 202, 150 176, 208 182" fill="none" stroke="#b5342a" stroke-width="6" stroke-linecap="round"/>
-        </svg>
         <div class="cable-bundle" id="cable-bundle">
           <button class="cable-jack yellow" data-cable="y" type="button" title="Video (yellow)"></button>
           <button class="cable-jack white" data-cable="w" type="button" title="Audio L (white)"></button>
@@ -140,11 +111,9 @@
 
       <div class="capture-box" id="capture-box">
         <div class="capture-led" id="capture-led"></div>
-        <span class="capture-label" id="capture-power-label">ClipCatch</span>
       </div>
 
       <div class="monitor" id="monitor">
-        <div class="monitor-sticky"></div>
         <div class="monitor-screen" id="monitor-screen">
           <div class="desktop-view" id="desktop-view">
             <div class="desktop-icon" data-icon="correct"><span class="app-glyph app-glyph-video"></span><span>ClipCatch</span></div>
@@ -179,7 +148,6 @@
             </div>
           </div>
         </div>
-        <div class="monitor-led"></div>
       </div>
     </div>
 
