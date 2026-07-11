@@ -246,6 +246,12 @@ function setStep(n) {
   // Anna holds the tape in her avatar during the eligibility beat, so the
   // desk tape stays hidden until the insert step actually goes live.
   dom.tapeWaiting.classList.toggle("pre-insert", state.awaitingEligibility);
+  // The power-on glow is step 4 feedback; don't let it linger onto later
+  // steps where the power button and capture box aren't the focus.
+  if (n !== 4) {
+    dom.btnPowerVcr.classList.remove("active-glow");
+    dom.captureBox.classList.remove("active-glow");
+  }
   renderDots();
   if (state.patronKey === "carol" && !state.awaitingEligibility) {
     updateSpotlight(n);

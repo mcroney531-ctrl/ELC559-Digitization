@@ -1194,9 +1194,14 @@ button { font-family: inherit; }
 .vcr-btn.spotlight-active,
 .sw-btn.spotlight-active {
   position: relative;
+  animation: spotlight-btn-pulse 1.1s ease-in-out infinite;
 }
 /* the VCR buttons are small, so hug their highlight closer than the default */
 .vcr-btn.spotlight-active { outline-offset: 2px; }
+@keyframes spotlight-btn-pulse {
+  0%, 100% { outline-color: rgba(255,179,71,0.55); filter: drop-shadow(0 0 7px rgba(255,179,71,0.5)); }
+  50%      { outline-color: rgba(255,179,71,1);    filter: drop-shadow(0 0 18px rgba(255,179,71,0.95)); }
+}
 /* Lift a panel that traps a spotlit control in its own stacking context so
    the control can rise above the overlay, then re-darken the panel with a
    matching scrim so only the spotlit control (z-index 20) reads as lit. */
@@ -1315,6 +1320,8 @@ button { font-family: inherit; }
   .capture-led.rec,
   .rec-dot,
   .vcr-power-pulse,
-  .sw-btn.ready-pulse { animation: none !important; }
+  .sw-btn.ready-pulse,
+  .vcr-btn.spotlight-active,
+  .sw-btn.spotlight-active { animation: none !important; }
   .cable-area.checking .cable-jack:not(.confirmed) { opacity: 0.75; }
 }
