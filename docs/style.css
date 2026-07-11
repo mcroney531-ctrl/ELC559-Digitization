@@ -432,7 +432,7 @@ button { font-family: inherit; }
 .desk {
   position: absolute;
   inset: 0;
-  background: url("assets/scene-desk.jpg?v=35") no-repeat;
+  background: url("assets/scene-desk.jpg?v=36") no-repeat;
   background-size: 1980px 1320px;
   background-position: 0 -190px;
 }
@@ -496,7 +496,7 @@ button { font-family: inherit; }
 #btn-power-vcr.spotlight-active,
 #btn-play.spotlight-active,
 #btn-rewind.spotlight-active {
-  background-image: url("assets/scene-desk.jpg?v=35");
+  background-image: url("assets/scene-desk.jpg?v=36");
   background-repeat: no-repeat;
   background-size: 1980px 1320px;
 }
@@ -857,7 +857,9 @@ button { font-family: inherit; }
   position: absolute;
   left: 600px; top: -29px;
   width: 112px; height: auto;
-  min-height: 76px;
+  /* one short line, but still tall enough to reach the screen edge below and
+     fully cover the baked "Check levels" note on the bezel */
+  min-height: 36px;
   padding: 7px 8px 8px;
   background: linear-gradient(180deg, #f6e192 0%, #efd472 80%, #e3c45c 100%);
   box-shadow: 0 3px 7px rgba(0,0,0,0.35);
