@@ -120,6 +120,8 @@ const dom = {
   avatarGary: el("avatar-gary"),
   dialogueName: el("dialogue-name"),
   dialogueText: el("dialogue-text"),
+  redirectToast: el("redirect-toast"),
+  redirectToastText: el("redirect-toast-text"),
   dialogueNext: el("dialogue-next"),
   warningOverlay: el("warning-overlay"),
   woStatic: el("wo-static"),
@@ -324,6 +326,18 @@ function hideCallout() {
   dom.calloutCard.hidden = true;
 }
 
+let redirectTimer = null;
+function showRedirect(msg) {
+  dom.redirectToastText.textContent = msg;
+  dom.redirectToast.hidden = false;
+  clearTimeout(redirectTimer);
+  redirectTimer = setTimeout(hideRedirect, 3400);
+}
+function hideRedirect() {
+  clearTimeout(redirectTimer);
+  dom.redirectToast.hidden = true;
+}
+
 function flashWrong(node) {
   SFX.err();
   const prev = node.style.outline;
@@ -332,6 +346,7 @@ function flashWrong(node) {
 }
 
 function resetProcedureUI() {
+  hideRedirect();
   dom.tapeGraphic.classList.remove("inserted");
   dom.tapeWaiting.classList.remove("used", "floating", "pre-insert");
   dom.claimTicket.hidden = true;
@@ -632,11 +647,12 @@ dom.btnPlay.addEventListener("click", () => {
   if (state.step !== 8) return;
   if (!state.recordClicked) {
     SFX.err();
-    dom.dialogueText.textContent = "You just played blank leader — hit Record first, then Play.";
+    showRedirect("You just played blank leader — hit Record first, then Play.");
     return;
   }
   SFX.click();
   state.playClicked = true;
+  hideRedirect();
   startCapture();
 });
 
