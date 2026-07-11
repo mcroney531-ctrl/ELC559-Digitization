@@ -1113,6 +1113,9 @@ button { font-family: inherit; }
 }
 .decision-memo {
   max-width: 1200px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
   background: var(--cream);
   color: #2a1c0d;
   padding: 26px 34px;
@@ -1120,7 +1123,15 @@ button { font-family: inherit; }
   transform: rotate(-0.4deg);
   box-shadow: 0 12px 26px rgba(0,0,0,0.45);
 }
+.decision-avatar {
+  width: 92px; height: 92px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--amber-dark);
+}
 .decision-prompt {
+  flex: 1;
   font-family: 'Tomorrow', sans-serif;
   font-size: 24px;
   line-height: 1.5;
