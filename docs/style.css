@@ -819,8 +819,10 @@ button { font-family: inherit; }
   border: 3px solid var(--amber-dark);
   background: var(--amber);
 }
-.dialogue-avatar svg { width: 100%; height: 100%; display: block; }
-.dialogue-avatar svg[hidden] { display: none; }
+.dialogue-avatar svg,
+.dialogue-avatar img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.dialogue-avatar svg[hidden],
+.dialogue-avatar img[hidden] { display: none; }
 .dialogue-main { flex: 1; min-width: 0; }
 .dialogue-name {
   font-family: 'Bebas Neue', sans-serif;
