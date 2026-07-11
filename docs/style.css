@@ -875,7 +875,7 @@ button { font-family: inherit; }
 .warning-overlay[hidden] { display: none; }
 .wo-screen {
   position: relative;
-  width: 1240px; height: 700px;
+  width: 1200px; height: 800px;
   background: #000;
   border: 26px solid #1c1c22;
   border-radius: 26px;
@@ -964,13 +964,13 @@ button { font-family: inherit; }
   text-align: center;
 }
 .wo-title[hidden] { display: none; }
-/* real "American Voices" broadcast title card fills the CRT (letterboxed) */
+/* real "American Voices" broadcast title card fills the CRT */
 .wo-title-media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   background: #000;
 }
 .wo-bug {
