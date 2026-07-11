@@ -105,6 +105,7 @@ const dom = {
   inputSelect: el("input-select"),
   softwarePreview: el("software-preview"),
   previewNoise: el("preview-noise"),
+  previewVideo: el("preview-video"),
   recDot: el("rec-dot"),
   trackingSlider: el("tracking-slider"),
   progressTrack: el("progress-track"),
@@ -252,6 +253,8 @@ function setStep(n) {
     dom.btnPowerVcr.classList.remove("active-glow");
     dom.captureBox.classList.remove("active-glow");
   }
+  // the captured-footage clip only rolls during the step 9 capture
+  if (n !== 9) dom.previewVideo.pause();
   renderDots();
   if (state.patronKey === "carol" && !state.awaitingEligibility) {
     updateSpotlight(n);
@@ -344,6 +347,8 @@ function resetProcedureUI() {
   dom.inputSelect.value = "";
   dom.softwarePreview.className = "software-preview";
   dom.previewNoise.style.opacity = "";
+  dom.previewVideo.pause();
+  dom.previewVideo.currentTime = 0;
   dom.recDot.hidden = true;
   dom.trackingSlider.hidden = true;
   dom.trackingSlider.value = 0;
@@ -637,6 +642,9 @@ function startCapture() {
   setStep(9);
   dom.recDot.hidden = false;
   dom.captureLed.classList.add("rec");
+  // roll the real captured footage while the tape plays through
+  dom.previewVideo.currentTime = 0;
+  dom.previewVideo.play().catch(() => {});
   dom.progressTrack.hidden = false;
   dom.btnStopCapture.hidden = false;
   dom.btnStopCapture.disabled = true;
@@ -662,6 +670,7 @@ dom.btnStopCapture.addEventListener("click", () => {
 function finishCapture() {
   dom.recDot.hidden = true;
   dom.captureLed.classList.remove("rec");
+  dom.previewVideo.pause();
   dom.btnStopCapture.classList.remove("ready-pulse");
   dom.btnStopCapture.disabled = true;
   setStep(10);
@@ -730,6 +739,8 @@ function fastForwardTo(targetStep) {
     if (targetStep === 9) {
       dom.recDot.hidden = false;
       dom.captureLed.classList.add("rec");
+      dom.previewVideo.currentTime = 0;
+      dom.previewVideo.play().catch(() => {});
       dom.btnStopCapture.disabled = false;
       dom.btnStopCapture.classList.add("ready-pulse");
       state.captureDone = true;
