@@ -717,8 +717,20 @@ button { font-family: inherit; }
 .monitor {
   position: absolute;
   left: 1150px; top: 156px;
-  width: 713px; height: 596px;
+  width: 707px; height: 596px;
   z-index: 8;
+}
+/* Black mask over the top bezel strip: covers the baked "Check levels" sticky
+   note and the light reflection gap so the top reads as solid black like the
+   rest of the monitor outline. Sits in the bezel above the screen, flush with
+   the screen top so it never paints over the picture. */
+.monitor::before {
+  content: "";
+  position: absolute;
+  left: 2px; right: 0;
+  top: -34px; height: 34px;
+  background: #0b0b0b;
+  pointer-events: none;
 }
 .monitor-screen {
   width: 100%; height: 100%;
