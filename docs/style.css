@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=Bebas+Neue&family=Special+Elite&family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Noto+Sans:wght@400;600;700&family=Special+Elite&family=Nunito:wght@400;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -121,7 +121,8 @@ button { font-family: inherit; }
   padding-bottom: 12px;
 }
 .sop-panel h1 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 62px;
   letter-spacing: 2px;
   margin-top: 6px;
@@ -179,7 +180,8 @@ button { font-family: inherit; }
 .btn-secondary:hover { background: var(--navy); color: #f7f5ef; }
 .btn-primary {
   margin-top: 34px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 26px;
   letter-spacing: 1px;
   background: var(--amber);
@@ -508,7 +510,8 @@ button { font-family: inherit; }
   border-top: 16px solid var(--amber-dark);
 }
 .cable-popover-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 19px;
   letter-spacing: 2px;
   color: var(--amber-glow);
@@ -828,7 +831,8 @@ button { font-family: inherit; }
 .dialogue-avatar img[hidden] { display: none; }
 .dialogue-main { flex: 1; min-width: 0; }
 .dialogue-name {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 17px;
   letter-spacing: 3px;
   color: var(--amber-glow);
@@ -917,7 +921,8 @@ button { font-family: inherit; }
   color: #c9b464;
 }
 .wo-fbi h3 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 64px;
   letter-spacing: 12px;
   color: #fff;
@@ -950,7 +955,8 @@ button { font-family: inherit; }
 .wo-bug {
   position: absolute;
   top: 24px; right: 34px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 26px;
   letter-spacing: 2px;
   color: rgba(255,255,255,0.55);
@@ -994,7 +1000,8 @@ button { font-family: inherit; }
   background: #10141f;
 }
 .wo-title h3 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 84px;
   letter-spacing: 8px;
   color: #e8d48a;
@@ -1007,7 +1014,8 @@ button { font-family: inherit; }
   margin-top: 6px;
 }
 .wo-network {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 20px;
   letter-spacing: 6px;
   color: #8a94b4;
@@ -1132,13 +1140,15 @@ button { font-family: inherit; }
   padding-bottom: 14px;
 }
 .shift-report h2 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 52px;
   letter-spacing: 2px;
   color: var(--wood-dark);
 }
 .report-stamp {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 26px;
   letter-spacing: 3px;
   padding: 8px 18px;
@@ -1232,7 +1242,8 @@ button { font-family: inherit; }
 .callout-card[hidden] { display: none; }
 /* attached navy banner strip across the top of the instruction boxes */
 .callout-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
   font-size: 21px;
   letter-spacing: 2px;
   color: var(--cream);
