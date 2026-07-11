@@ -88,6 +88,7 @@ const scenes = document.querySelectorAll(".scene");
 
 const dom = {
   canvas: el("canvas"),
+  sceneFade: el("scene-fade"),
   stepBanner: el("step-banner"),
   progressDots: el("progress-dots"),
   spotlightOverlay: el("spotlight-overlay"),
@@ -431,6 +432,15 @@ function resetProcedureUI() {
   state.captureDone = false;
 }
 
+// Black-wipe handoff: fade to black, swap the patron behind it, fade back in.
+function fadeToPatron(key) {
+  dom.sceneFade.classList.add("show");
+  setTimeout(() => {
+    startPatron(key);
+    setTimeout(() => dom.sceneFade.classList.remove("show"), 120);
+  }, 520);
+}
+
 function startPatron(key, skipEligibility) {
   state.patronKey = key;
   const p = PATRONS[key];
@@ -499,7 +509,7 @@ function ejectTape() {
   dom.dialogueText.textContent = PATRONS.carol.closing;
   hideSpotlight();
   hideCallout();
-  setTimeout(() => startPatron("gary"), 2200);
+  setTimeout(() => fadeToPatron("gary"), 2200);
 }
 dom.tapeGraphic.addEventListener("click", ejectTape);
 

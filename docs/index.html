@@ -7,12 +7,13 @@
 <!-- Preload the procedure-scene backdrop so it's decoded before Start Shift,
      avoiding a flash of the empty desk on the first scene switch. -->
 <link rel="preload" as="image" href="assets/scene-desk.jpg">
-<link rel="stylesheet" href="style.css?v=25">
+<link rel="stylesheet" href="style.css?v=26">
 </head>
 <body>
 
 <div class="canvas" id="canvas">
   <div class="scanlines"></div>
+  <div class="scene-fade" id="scene-fade"></div>
 
   <button class="sfx-toggle" id="sfx-toggle" type="button" aria-label="Toggle sound effects">SOUND: ON</button>
 
@@ -233,6 +234,6 @@
 
 </div>
 
-<script src="script.js?v=25"></script>
+<script src="script.js?v=26"></script>
 </body>
 </html>
