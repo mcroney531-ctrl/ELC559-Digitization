@@ -303,7 +303,7 @@ button { font-family: inherit; }
 .desk {
   position: absolute;
   inset: 0;
-  background: url("assets/scene-desk.jpg?v=31") no-repeat;
+  background: url("assets/scene-desk.jpg?v=32") no-repeat;
   background-size: 1980px 1320px;
   background-position: 0 -190px;
 }
@@ -367,7 +367,7 @@ button { font-family: inherit; }
 #btn-power-vcr.spotlight-active,
 #btn-play.spotlight-active,
 #btn-rewind.spotlight-active {
-  background-image: url("assets/scene-desk.jpg?v=31");
+  background-image: url("assets/scene-desk.jpg?v=32");
   background-repeat: no-repeat;
   background-size: 1980px 1320px;
 }
@@ -515,7 +515,8 @@ button { font-family: inherit; }
 .vcr-btn.vcr-power-pulse::before {
   content: "";
   position: absolute;
-  inset: -2px;
+  /* the power button's div matches its photographed key closely; hug it flush */
+  inset: 0;
   border: 3px solid var(--amber);
   border-radius: 4px;
   pointer-events: none;
@@ -525,16 +526,27 @@ button { font-family: inherit; }
   0%, 100% { opacity: 0.45; transform: scale(0.97); box-shadow: 0 0 6px var(--amber); }
   50% { opacity: 1; transform: scale(1.03); box-shadow: 0 0 14px var(--amber); }
 }
-/* step 2: a smaller pulsing square hugging the rewind button */
+/* step 2: a smaller pulsing square hugging the rewind button. The rewind div
+   runs a little taller than the photographed key, so pull the bottom inset up
+   (top/right/bottom/left) to keep the ring on the key, not the chassis below. */
 .vcr-btn.vcr-rewind-pulse { position: absolute; z-index: 21; }
 .vcr-btn.vcr-rewind-pulse::before {
   content: "";
   position: absolute;
-  inset: 4px;
+  inset: 2px 3px 9px 3px;
   border: 3px solid var(--amber);
   border-radius: 3px;
   pointer-events: none;
   animation: power-square-pulse 1.1s ease-in-out infinite;
+}
+/* Joseph's flow spotlights the rewind button itself AND pulses it, which stacks
+   the static spotlight outline under the pulsing ring (a doubled box). When both
+   are present, keep only the single pulsing ring — drop the outline and its
+   outline-color animation; the button stays lit via its photo punch-through. */
+.vcr-btn.spotlight-active.vcr-rewind-pulse,
+.vcr-btn.spotlight-active.vcr-power-pulse {
+  outline: none;
+  animation: none;
 }
 .vcr-led {
   position: absolute;

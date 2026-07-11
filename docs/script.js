@@ -921,6 +921,11 @@ function runGaryMontage() {
     if (state.step === 2 && state.patronKey === "gary") {
       applySpotlight([dom.btnRewind]);
       dom.btnRewind.classList.add("vcr-rewind-pulse");
+      // The power-on glow was feedback for the auto power-up beat; clear it so
+      // the power button and capture box carry no stray box once the scene
+      // dims to spotlight only the rewind.
+      dom.btnPowerVcr.classList.remove("active-glow");
+      dom.captureBox.classList.remove("active-glow");
     }
   }, 2000);
 }
