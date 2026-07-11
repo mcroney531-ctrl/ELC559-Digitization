@@ -303,10 +303,62 @@ button { font-family: inherit; }
 .desk {
   position: absolute;
   inset: 0;
-  background: url("assets/scene-desk.jpg?v=30") no-repeat;
+  background: url("assets/scene-desk.jpg?v=31") no-repeat;
   background-size: 1980px 1320px;
   background-position: 0 -190px;
 }
+
+/* Clean HTML poster that fully covers the baked-in wall poster so the
+   copyright message reads crisp instead of being painted over the photo. */
+.wall-poster {
+  position: absolute;
+  left: 881px; top: -3px;
+  width: 213px; height: 250px;
+  background: linear-gradient(158deg, #fbf6e9 0%, #f3ead2 100%);
+  border: 1px solid #d8cba6;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35), inset 0 0 22px rgba(120, 95, 40, 0.08);
+  transform: rotate(-1.4deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 22px 16px;
+  text-align: center;
+  z-index: 4;
+}
+.wall-poster-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 42px;
+  line-height: 0.92;
+  letter-spacing: 1.5px;
+  color: #8a1f1a;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.wall-poster-rule {
+  width: 60%;
+  height: 3px;
+  background: #8a1f1a;
+  opacity: 0.75;
+}
+.wall-poster-sub {
+  font-family: "Tomorrow", "Noto Sans", sans-serif;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: #3a2f1c;
+  max-width: 88%;
+}
+.wall-poster-tape {
+  position: absolute;
+  width: 46px; height: 20px;
+  background: rgba(220, 205, 150, 0.55);
+  border: 1px solid rgba(180, 160, 100, 0.4);
+  top: -8px;
+}
+.wall-poster-tape-l { left: 10px; transform: rotate(-24deg); }
+.wall-poster-tape-r { right: 10px; transform: rotate(24deg); }
+
 /* Spotlighted equipment "punches through" the dim veil by re-showing its own
    region of the scene photo, aligned to the same mapping. */
 .vcr.spotlight-active,
@@ -315,7 +367,7 @@ button { font-family: inherit; }
 #btn-power-vcr.spotlight-active,
 #btn-play.spotlight-active,
 #btn-rewind.spotlight-active {
-  background-image: url("assets/scene-desk.jpg?v=30");
+  background-image: url("assets/scene-desk.jpg?v=31");
   background-repeat: no-repeat;
   background-size: 1980px 1320px;
 }

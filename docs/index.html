@@ -6,8 +6,8 @@
 <title>Patron Media Digitization — Media Preservation Center</title>
 <!-- Preload the procedure-scene backdrop so it's decoded before Start Shift,
      avoiding a flash of the empty desk on the first scene switch. -->
-<link rel="preload" as="image" href="assets/scene-desk.jpg?v=30">
-<link rel="stylesheet" href="style.css?v=30">
+<link rel="preload" as="image" href="assets/scene-desk.jpg?v=31">
+<link rel="stylesheet" href="style.css?v=31">
 </head>
 <body>
 
@@ -53,6 +53,14 @@
     <div class="redirect-toast" id="redirect-toast" hidden><span id="redirect-toast-text"></span></div>
 
     <div class="desk">
+      <div class="wall-poster" aria-hidden="true">
+        <div class="wall-poster-tape wall-poster-tape-l"></div>
+        <div class="wall-poster-tape wall-poster-tape-r"></div>
+        <div class="wall-poster-title">Personal<br>Recordings<br>Only</div>
+        <div class="wall-poster-rule"></div>
+        <div class="wall-poster-sub">Ask our front desk about our digitization policies</div>
+      </div>
+
       <div class="spotlight-overlay" id="spotlight-overlay" hidden></div>
 
       <div class="cable-popover" id="cable-popover" hidden>
@@ -248,6 +256,6 @@
 
 </div>
 
-<script src="script.js?v=30"></script>
+<script src="script.js?v=31"></script>
 </body>
 </html>
