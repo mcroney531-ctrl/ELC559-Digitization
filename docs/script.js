@@ -97,6 +97,7 @@ const dom = {
   calloutInstruction: el("callout-instruction"),
   calloutTip: el("callout-tip"),
   calloutNext: el("callout-next"),
+  calloutBack: el("callout-back"),
   vcr: el("vcr"),
   vcrLed: el("vcr-led"),
   monitor: el("monitor"),
@@ -351,6 +352,9 @@ function updateCallout(step) {
   dom.calloutInstruction.textContent = copy.instruction;
   dom.calloutTip.textContent = copy.tip;
   dom.calloutNext.textContent = step === 11 ? "Eject ›" : "Next Step ›";
+  // Previous is available once past the first step; going back rebuilds the
+  // earlier state so the step can be redone.
+  dom.calloutBack.hidden = step <= 1;
 }
 
 function hideCallout() {
@@ -532,6 +536,14 @@ dom.calloutNext.addEventListener("click", () => {
   }
   // full shift: you must actually complete the step to move on
   nudgeStep();
+});
+
+dom.calloutBack.addEventListener("click", () => {
+  if (state.patronKey !== "carol" || state.step <= 1) return;
+  SFX.click();
+  // fastForwardTo rebuilds the world for the target step, so it works going
+  // backward too — it lands you at the start of the previous step.
+  fastForwardTo(state.step - 1);
 });
 
 // ---- Step 2: Rewind ----
