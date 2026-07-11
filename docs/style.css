@@ -303,7 +303,7 @@ button { font-family: inherit; }
 .desk {
   position: absolute;
   inset: 0;
-  background: url("assets/scene-desk.jpg?v=32") no-repeat;
+  background: url("assets/scene-desk.jpg?v=33") no-repeat;
   background-size: 1980px 1320px;
   background-position: 0 -190px;
 }
@@ -367,7 +367,7 @@ button { font-family: inherit; }
 #btn-power-vcr.spotlight-active,
 #btn-play.spotlight-active,
 #btn-rewind.spotlight-active {
-  background-image: url("assets/scene-desk.jpg?v=32");
+  background-image: url("assets/scene-desk.jpg?v=33");
   background-repeat: no-repeat;
   background-size: 1980px 1320px;
 }
@@ -584,9 +584,9 @@ button { font-family: inherit; }
   justify-content: center;
   transition: opacity 0.3s, box-shadow 0.3s;
 }
-.cable-jack.yellow { left: 42px; top: 25px; background: var(--cable-yellow); }
-.cable-jack.white { left: 42px; top: 69px; background: var(--cable-white); }
-.cable-jack.red { left: 45px; top: 124px; background: var(--cable-red); }
+.cable-jack.yellow { left: 44px; top: 26px; background: var(--cable-yellow); }
+.cable-jack.white { left: 44px; top: 67px; background: var(--cable-white); }
+.cable-jack.red { left: 47px; top: 122px; background: var(--cable-red); }
 .cable-area.checking .cable-jack:not(.confirmed) {
   animation: jack-pulse 1.3s ease-in-out infinite;
 }
@@ -720,17 +720,44 @@ button { font-family: inherit; }
   width: 707px; height: 596px;
   z-index: 8;
 }
-/* Black mask over the top bezel strip: covers the baked "Check levels" sticky
-   note and the light reflection gap so the top reads as solid black like the
-   rest of the monitor outline. Sits in the bezel above the screen, flush with
-   the screen top so it never paints over the picture. */
+/* Black mask over the top bezel strip: covers the light reflection gap so the
+   top reads as solid black like the rest of the monitor outline. Sized to the
+   photographed bezel (25px above the screen opening) so it doesn't spill onto
+   the wall; the baked "Check levels" note is covered by .monitor-note below. */
 .monitor::before {
   content: "";
   position: absolute;
   left: 2px; right: 0;
-  top: -34px; height: 34px;
+  top: -25px; height: 25px;
   background: #0b0b0b;
   pointer-events: none;
+}
+/* Fresh sticky note hung on the top bezel, covering the baked-in "Check levels"
+   note (photo x1764-1855, poking above the bezel) with crisp handwritten SOP
+   reminders — same overlay trick as the wall poster. */
+.monitor-note {
+  position: absolute;
+  left: 604px; top: -84px;
+  width: 104px; height: 96px;
+  padding: 9px 8px 6px;
+  background: linear-gradient(180deg, #f6e192 0%, #efd472 80%, #e3c45c 100%);
+  box-shadow: 0 3px 7px rgba(0,0,0,0.35);
+  transform: rotate(-2.5deg);
+  font-family: 'Chelsea Market', cursive;
+  font-size: 12px;
+  line-height: 1.35;
+  color: #4a3a14;
+  pointer-events: none;
+}
+/* the strip of "tape" holding the note to the bezel */
+.monitor-note::before {
+  content: "";
+  position: absolute;
+  left: 30px; top: -7px;
+  width: 44px; height: 13px;
+  background: rgba(245, 240, 220, 0.55);
+  transform: rotate(1.5deg);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 .monitor-screen {
   width: 100%; height: 100%;
@@ -1173,6 +1200,29 @@ button { font-family: inherit; }
   text-align: center;
 }
 .wo-title[hidden] { display: none; }
+/* Phony video-player play button centered over the title card — decoration
+   only, so the frame reads as a paused stream. */
+.wo-play-badge {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 4px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.wo-play-tri {
+  width: 0; height: 0;
+  border-top: 26px solid transparent;
+  border-bottom: 26px solid transparent;
+  border-left: 42px solid rgba(255, 255, 255, 0.92);
+  margin-left: 10px;
+}
 /* real "American Voices" broadcast title card fills the CRT */
 .wo-title-media {
   position: absolute;

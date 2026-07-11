@@ -6,8 +6,8 @@
 <title>Patron Media Digitization — Media Preservation Center</title>
 <!-- Preload the procedure-scene backdrop so it's decoded before Start Shift,
      avoiding a flash of the empty desk on the first scene switch. -->
-<link rel="preload" as="image" href="assets/scene-desk.jpg?v=32">
-<link rel="stylesheet" href="style.css?v=32">
+<link rel="preload" as="image" href="assets/scene-desk.jpg?v=33">
+<link rel="stylesheet" href="style.css?v=33">
 </head>
 <body>
 
@@ -138,6 +138,7 @@
       </div>
 
       <div class="monitor" id="monitor">
+        <div class="monitor-note" aria-hidden="true">rewind first!<br>check levels &#10003;<br>name: Event_Year</div>
         <div class="monitor-screen" id="monitor-screen">
           <div class="desktop-view" id="desktop-view">
             <div class="desktop-icon" data-icon="correct"><span class="app-glyph app-glyph-video"></span><span>ClipCatch</span></div>
@@ -218,6 +219,7 @@
         <video class="wo-title-media" id="wo-title-video" poster="assets/american-voices-poster.jpg" muted loop playsinline preload="auto">
           <source src="assets/american-voices.webm" type="video/webm">
         </video>
+        <div class="wo-play-badge" aria-hidden="true"><span class="wo-play-tri"></span></div>
       </div>
     </div>
     <p class="wo-caption" id="wo-caption" hidden>Wait &mdash; this doesn't look like a home recording&hellip;</p>
@@ -259,6 +261,6 @@
 
 </div>
 
-<script src="script.js?v=32"></script>
+<script src="script.js?v=33"></script>
 </body>
 </html>
