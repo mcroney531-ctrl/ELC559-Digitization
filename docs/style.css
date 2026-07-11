@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=Bebas+Neue&family=Chelsea+Market&family=Special+Elite&family=Noto+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Bebas+Neue&family=Chelsea+Market&family=Tomorrow:wght@400;500;700&family=Noto+Sans:wght@400;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -129,7 +129,7 @@ button { font-family: inherit; }
   text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 .intro-sub {
-  font-family: 'Special Elite', monospace;
+  font-family: 'Tomorrow', sans-serif;
   color: var(--amber-dark);
   font-size: 17px;
   margin-top: 20px;
@@ -328,7 +328,7 @@ button { font-family: inherit; }
   border: 1px dashed #8a7a5c;
   transform: rotate(-3deg);
   text-align: center;
-  font-family: 'Special Elite', monospace;
+  font-family: 'Tomorrow', sans-serif;
   z-index: 12;
   box-shadow: 0 8px 16px rgba(0,0,0,0.35);
   animation: ticket-pop 0.4s ease-out;
@@ -795,7 +795,7 @@ button { font-family: inherit; }
 .elig-btn:hover { background: var(--navy); color: #f7f5ef; }
 .eligibility-toast {
   margin-top: 16px;
-  font-family: 'Special Elite', monospace;
+  font-family: 'Tomorrow', sans-serif;
   font-size: 15px;
   color: var(--navy-dark);
 }
@@ -924,7 +924,7 @@ button { font-family: inherit; }
 }
 .wo-fbi p {
   margin-top: 18px;
-  font-family: 'Special Elite', monospace;
+  font-family: 'Tomorrow', sans-serif;
   font-size: 24px;
   line-height: 1.6;
   color: #e8e2cc;
@@ -932,7 +932,7 @@ button { font-family: inherit; }
 .wo-fbi small {
   display: block;
   margin-top: 18px;
-  font-family: 'Special Elite', monospace;
+  font-family: 'Tomorrow', sans-serif;
   font-size: 14px;
   color: #9aa4c4;
 }
@@ -1001,7 +1001,7 @@ button { font-family: inherit; }
   text-shadow: 0 0 26px rgba(232,212,138,0.4);
 }
 .wo-subtitle {
-  font-family: 'Special Elite', monospace;
+  font-family: 'Tomorrow', sans-serif;
   font-size: 26px;
   color: #cfd6e8;
   margin-top: 6px;
@@ -1029,7 +1029,7 @@ button { font-family: inherit; }
   padding: 12px 22px;
 }
 .wo-caption {
-  font-family: 'Special Elite', monospace;
+  font-family: 'Tomorrow', sans-serif;
   font-size: 26px;
   color: var(--cream);
 }
@@ -1053,7 +1053,7 @@ button { font-family: inherit; }
   box-shadow: 0 12px 26px rgba(0,0,0,0.45);
 }
 .decision-prompt {
-  font-family: 'Special Elite', monospace;
+  font-family: 'Tomorrow', sans-serif;
   font-size: 24px;
   line-height: 1.5;
 }
@@ -1170,7 +1170,7 @@ button { font-family: inherit; }
   font-size: 17px;
   line-height: 1.6;
   border-left: 6px solid var(--navy);
-  font-family: 'Special Elite', monospace;
+  font-family: 'Tomorrow', sans-serif;
 }
 
 /* ---------- SPOTLIGHT / CALLOUT (step-by-step guided mode) ---------- */
@@ -1249,7 +1249,7 @@ button { font-family: inherit; }
 }
 .callout-tip {
   margin-top: 8px;
-  font-family: 'Special Elite', monospace;
+  font-family: 'Tomorrow', sans-serif;
   font-size: 14px;
   color: var(--navy-dark);
   font-style: italic;
