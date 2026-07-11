@@ -26,6 +26,21 @@ const STEP_COPY = [
   { instruction: "Click the tape to eject it and hand it back with a claim ticket.", tip: "Always return the original — you're making a copy, not keeping it." }
 ];
 
+// short "you can't advance yet" nudges, one per step (1-indexed by step)
+const STEP_NUDGE = [
+  "Load the tape into the VCR first.",
+  "Rewind the tape to the beginning first.",
+  "Confirm all three cable outlets first.",
+  "Power on both the VCR and the capture box first.",
+  "Open the ClipCatch software first.",
+  "Select the input source and format first.",
+  "Lock in the tracking first.",
+  "Start the capture — Record, then Play.",
+  "Let the capture finish, then press Stop.",
+  "Save the file first.",
+  "Click the tape to eject it."
+];
+
 const PATRONS = {
   carol: {
     name: "ANNA",
@@ -146,6 +161,7 @@ const dom = {
 const state = {
   patronKey: null,
   step: 1,
+  jumpMode: false,
   awaitingEligibility: false,
   rewound: false,
   vcrPowered: false,
@@ -243,6 +259,7 @@ function showScene(id) {
 
 function setStep(n) {
   state.step = n;
+  hideRedirect();
   if (n !== 3) hideCablePopoverNow();
   if (n === 3 && state.patronKey === "carol") dom.cableArea.classList.add("checking");
   dom.stepBanner.textContent = `Step ${n} of 11 — ${STEP_NAMES[n - 1]}`;
@@ -278,7 +295,7 @@ function renderDots() {
     d.className = "dot" + (i < state.step ? " done" : i === state.step ? " current" : "");
     d.title = `Step ${i}: ${STEP_NAMES[i - 1]}`;
     d.setAttribute("aria-label", `Jump to step ${i}: ${STEP_NAMES[i - 1]}`);
-    if (state.patronKey === "carol") {
+    if (state.patronKey === "carol" && state.jumpMode) {
       d.addEventListener("click", () => { SFX.click(); fastForwardTo(i); });
     } else {
       d.disabled = true;
@@ -340,6 +357,15 @@ function showRedirect(msg) {
 function hideRedirect() {
   clearTimeout(redirectTimer);
   dom.redirectToast.hidden = true;
+}
+
+// nudge the player back to the current step when they try to skip ahead in
+// the full walkthrough (the specific-step track navigates freely instead)
+function nudgeStep() {
+  if (state.patronKey !== "carol" || state.jumpMode || state.awaitingEligibility) return false;
+  SFX.err();
+  showRedirect(STEP_NUDGE[state.step - 1]);
+  return true;
 }
 
 function flashWrong(node) {
@@ -409,6 +435,9 @@ function startPatron(key, skipEligibility) {
   dom.dialogueName.textContent = p.name;
   dom.dialogueText.textContent = p.intro;
   state.awaitingEligibility = key === "carol" && !skipEligibility;
+  // Only the "I just need a specific step" entry unlocks free navigation
+  // (jump via dots / Next Step). The full shift must be worked in order.
+  state.jumpMode = key === "carol" && !!skipEligibility;
   setStep(1);
   showScene("scene-procedure");
   if (state.awaitingEligibility) {
@@ -468,17 +497,26 @@ dom.tapeGraphic.addEventListener("click", ejectTape);
 
 dom.calloutNext.addEventListener("click", () => {
   if (state.patronKey !== "carol") return;
-  SFX.click();
   if (state.step === 11) {
+    // "Eject ›" is the step 11 action itself
+    SFX.click();
     ejectTape();
-  } else {
-    fastForwardTo(state.step + 1);
+    return;
   }
+  if (state.jumpMode) {
+    // specific-step track: free to browse ahead
+    SFX.click();
+    fastForwardTo(state.step + 1);
+    return;
+  }
+  // full shift: you must actually complete the step to move on
+  nudgeStep();
 });
 
 // ---- Step 2: Rewind ----
 dom.btnRewind.addEventListener("click", () => {
-  if (state.rewound || state.step !== 2) return;
+  if (state.step !== 2) { nudgeStep(); return; }
+  if (state.rewound) return;
   SFX.click();
   SFX.whirStart();
   dom.btnRewind.classList.add("active-glow");
@@ -507,7 +545,8 @@ dom.btnRewind.addEventListener("click", () => {
 // confirm it's in the right port; the cord lights up and the outlet checks) ----
 dom.cableBundle.querySelectorAll(".cable-jack").forEach((jack) => {
   jack.addEventListener("click", () => {
-    if (state.step !== 3 || jack.classList.contains("confirmed")) return;
+    if (state.step !== 3) { nudgeStep(); return; }
+    if (jack.classList.contains("confirmed")) return;
     SFX.click();
     jack.classList.add("confirmed");
     dom.cableArea.classList.add(`${jack.dataset.cable}-ok`);
@@ -567,7 +606,7 @@ function powerOnVisuals() {
   dom.captureLed.classList.add("on");
 }
 dom.btnPowerVcr.addEventListener("click", () => {
-  if (state.step !== 4) return;
+  if (state.step !== 4) { nudgeStep(); return; }
   SFX.click();
   state.vcrPowered = true;
   dom.btnPowerVcr.classList.add("active-glow");
@@ -576,7 +615,7 @@ dom.btnPowerVcr.addEventListener("click", () => {
   checkPower();
 });
 dom.captureBox.addEventListener("click", () => {
-  if (state.step !== 4) return;
+  if (state.step !== 4) { nudgeStep(); return; }
   SFX.click();
   state.capturePowered = true;
   dom.captureBox.classList.add("active-glow");
@@ -652,7 +691,7 @@ dom.btnRecord.addEventListener("click", () => {
   dom.btnRecord.disabled = true;
 });
 dom.btnPlay.addEventListener("click", () => {
-  if (state.step !== 8) return;
+  if (state.step !== 8) { nudgeStep(); return; }
   if (!state.recordClicked) {
     SFX.err();
     showRedirect("You just played blank leader — hit Record first, then Play.");
