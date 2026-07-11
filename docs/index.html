@@ -7,7 +7,7 @@
 <!-- Preload the procedure-scene backdrop so it's decoded before Start Shift,
      avoiding a flash of the empty desk on the first scene switch. -->
 <link rel="preload" as="image" href="assets/scene-desk.jpg">
-<link rel="stylesheet" href="style.css?v=26">
+<link rel="stylesheet" href="style.css?v=27">
 </head>
 <body>
 
@@ -142,7 +142,10 @@
                 </div>
                 <div class="preview-noise" id="preview-noise"></div>
               </div>
-              <input type="range" id="tracking-slider" min="0" max="100" value="0" hidden>
+              <div class="tracking-row" id="tracking-row" hidden>
+                <span class="track-arrow" id="track-arrow" aria-hidden="true">&#9660;</span>
+                <input type="range" id="tracking-slider" min="0" max="100" value="0">
+              </div>
               <div class="progress-track" id="progress-track" hidden><div class="progress-fill" id="progress-fill"></div></div>
               <div class="software-controls">
                 <button id="btn-record" class="sw-btn record"><span class="icon-circle"></span> Record</button>
@@ -234,6 +237,6 @@
 
 </div>
 
-<script src="script.js?v=26"></script>
+<script src="script.js?v=27"></script>
 </body>
 </html>

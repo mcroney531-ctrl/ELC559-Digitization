@@ -124,6 +124,8 @@ const dom = {
   previewVideo: el("preview-video"),
   recDot: el("rec-dot"),
   trackingSlider: el("tracking-slider"),
+  trackingRow: el("tracking-row"),
+  trackArrow: el("track-arrow"),
   progressTrack: el("progress-track"),
   progressFill: el("progress-fill"),
   btnRecord: el("btn-record"),
@@ -405,7 +407,8 @@ function resetProcedureUI() {
   dom.previewVideo.pause();
   dom.previewVideo.currentTime = 0;
   dom.recDot.hidden = true;
-  dom.trackingSlider.hidden = true;
+  dom.trackingRow.hidden = true;
+  dom.trackArrow.hidden = true;
   dom.trackingSlider.value = 0;
   dom.trackingSlider.disabled = false;
   dom.progressTrack.hidden = true;
@@ -674,6 +677,19 @@ dom.inputSelect.addEventListener("change", () => {
   }
 });
 
+// Position the "drag me" arrow over the slider thumb (18px thumb).
+function positionTrackArrow() {
+  const T = 18;
+  const w = dom.trackingSlider.clientWidth;
+  if (!w) return;
+  const v = Number(dom.trackingSlider.value);
+  dom.trackArrow.style.left = ((v / 100) * (w - T) + T / 2) + "px";
+}
+function showTrackArrow(show) {
+  dom.trackArrow.hidden = !show;
+  if (show) positionTrackArrow();
+}
+
 function beginPreview() {
   const p = PATRONS[state.patronKey];
   if (p.outcome === "warning") {
@@ -681,17 +697,20 @@ function beginPreview() {
   } else {
     dom.softwarePreview.classList.add("live");
     dom.previewNoise.style.opacity = "1";
-    dom.trackingSlider.hidden = false;
+    dom.trackingRow.hidden = false;
+    showTrackArrow(true);
   }
 }
 
 // ---- Step 7: Tracking (static calms as you approach the sweet spot) ----
 dom.trackingSlider.addEventListener("input", () => {
   if (state.step !== 7) return;
+  positionTrackArrow();
   const v = Number(dom.trackingSlider.value);
   const err = Math.abs(v - 50);
   if (err <= 10) {
     SFX.chime();
+    showTrackArrow(false);
     dom.previewNoise.style.opacity = "0";
     dom.softwarePreview.classList.add("stable");
     dom.trackingSlider.disabled = true;
@@ -833,7 +852,8 @@ function fastForwardTo(targetStep) {
     dom.inputSelect.value = "composite-ntsc";
     dom.softwarePreview.classList.add("live");
     dom.previewNoise.style.opacity = "1";
-    dom.trackingSlider.hidden = false;
+    dom.trackingRow.hidden = false;
+    showTrackArrow(targetStep === 7);
   }
   if (targetStep >= 8) {
     dom.previewNoise.style.opacity = "0";
