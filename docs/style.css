@@ -298,6 +298,8 @@ button { font-family: inherit; }
 /* settle under the cursor so it's easy to click */
 .tape-waiting:hover { animation-play-state: paused; }
 .tape-waiting.used { opacity: 0; transform: translateY(60px); pointer-events: none; animation: none; }
+/* hidden during the eligibility beat; fades in when the insert step goes live */
+.tape-waiting.pre-insert { opacity: 0; pointer-events: none; animation: none; }
 .tape-waiting[hidden] { display: none; }
 @keyframes tape-waiting-pulse {
   0%, 100% { box-shadow: 0 6px 14px rgba(0,0,0,0.4), 0 0 0 3px var(--amber), 0 0 16px var(--amber); }

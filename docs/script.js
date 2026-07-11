@@ -243,6 +243,9 @@ function setStep(n) {
   if (n === 3 && state.patronKey === "carol") dom.cableArea.classList.add("checking");
   dom.stepBanner.textContent = `Step ${n} of 11 — ${STEP_NAMES[n - 1]}`;
   dom.tapeWaiting.classList.toggle("floating", n === 1 && state.patronKey === "carol" && !state.awaitingEligibility);
+  // Anna holds the tape in her avatar during the eligibility beat, so the
+  // desk tape stays hidden until the insert step actually goes live.
+  dom.tapeWaiting.classList.toggle("pre-insert", state.awaitingEligibility);
   renderDots();
   if (state.patronKey === "carol" && !state.awaitingEligibility) {
     updateSpotlight(n);
@@ -320,7 +323,7 @@ function flashWrong(node) {
 
 function resetProcedureUI() {
   dom.tapeGraphic.classList.remove("inserted");
-  dom.tapeWaiting.classList.remove("used", "floating");
+  dom.tapeWaiting.classList.remove("used", "floating", "pre-insert");
   dom.claimTicket.hidden = true;
   dom.btnRewind.classList.remove("active-glow");
   dom.btnPowerVcr.classList.remove("active-glow");
