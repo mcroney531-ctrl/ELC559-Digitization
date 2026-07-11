@@ -297,7 +297,8 @@ button { font-family: inherit; }
 .cable-area.spotlight-active,
 .capture-box.spotlight-active,
 #btn-power-vcr.spotlight-active,
-#btn-play.spotlight-active {
+#btn-play.spotlight-active,
+#btn-rewind.spotlight-active {
   background-image: url("assets/scene-desk.jpg");
   background-repeat: no-repeat;
   background-size: 1980px 1320px;
@@ -438,8 +439,9 @@ button { font-family: inherit; }
 #btn-play   { left: 285px; top: 150px; width: 52px; height: 60px; }
 #btn-power-vcr { left: 340px; top: 145px; width: 56px; height: 64px; }
 #btn-power-vcr.spotlight-active { background-position: -669px -912px; }
-/* play button lights up by re-showing its own bright region of the photo */
+/* play/rewind buttons light up by re-showing their own bright photo region */
 #btn-play.spotlight-active { background-position: -614px -917px; }
+#btn-rewind.spotlight-active { background-position: -547px -917px; }
 .vcr-btn.active-glow { box-shadow: 0 0 16px var(--amber), inset 0 0 0 2px var(--amber); }
 .vcr-btn.vcr-power-pulse { position: absolute; z-index: 21; }
 .vcr-btn.vcr-power-pulse::before {
