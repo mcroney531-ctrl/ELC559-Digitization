@@ -586,7 +586,7 @@ button { font-family: inherit; }
 }
 .cable-jack.yellow { left: 44px; top: 26px; background: var(--cable-yellow); }
 .cable-jack.white { left: 44px; top: 67px; background: var(--cable-white); }
-.cable-jack.red { left: 47px; top: 122px; background: var(--cable-red); }
+.cable-jack.red { left: 47px; top: 119px; background: var(--cable-red); }
 .cable-area.checking .cable-jack:not(.confirmed) {
   animation: jack-pulse 1.3s ease-in-out infinite;
 }
@@ -737,9 +737,9 @@ button { font-family: inherit; }
    reminders — same overlay trick as the wall poster. */
 .monitor-note {
   position: absolute;
-  left: 604px; top: -84px;
-  width: 104px; height: 96px;
-  padding: 9px 8px 6px;
+  left: 604px; top: -29px;
+  width: 104px; height: 84px;
+  padding: 8px 8px 5px;
   background: linear-gradient(180deg, #f6e192 0%, #efd472 80%, #e3c45c 100%);
   box-shadow: 0 3px 7px rgba(0,0,0,0.35);
   transform: rotate(-2.5deg);
@@ -753,7 +753,7 @@ button { font-family: inherit; }
 .monitor-note::before {
   content: "";
   position: absolute;
-  left: 30px; top: -7px;
+  left: 30px; top: 1px;
   width: 44px; height: 13px;
   background: rgba(245, 240, 220, 0.55);
   transform: rotate(1.5deg);
