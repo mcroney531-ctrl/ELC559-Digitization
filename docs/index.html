@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Patron Media Digitization — Media Preservation Center</title>
-<link rel="stylesheet" href="style.css?v=20">
+<!-- Preload the procedure-scene backdrop so it's decoded before Start Shift,
+     avoiding a flash of the empty desk on the first scene switch. -->
+<link rel="preload" as="image" href="assets/scene-desk.jpg">
+<link rel="stylesheet" href="style.css?v=21">
 </head>
 <body>
 
@@ -231,6 +234,6 @@
 
 </div>
 
-<script src="script.js?v=20"></script>
+<script src="script.js?v=21"></script>
 </body>
 </html>
