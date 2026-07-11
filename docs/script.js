@@ -637,29 +637,57 @@ dom.btnPlay.addEventListener("click", () => {
   startCapture();
 });
 
-// ---- Step 9: capture runs, user presses Stop ----
+// ---- Step 9: capture runs for the length of the clip, user presses Stop ----
+let captureFallbackTimer = null;
+
+function markCaptureReady() {
+  if (state.step !== 9 || state.captureDone) return;
+  dom.progressFill.style.transition = "width 0.2s linear";
+  dom.progressFill.style.width = "100%";
+  SFX.chime();
+  dom.btnStopCapture.disabled = false;
+  dom.btnStopCapture.classList.add("ready-pulse");
+  state.captureDone = true;
+}
+
 function startCapture() {
   setStep(9);
+  state.captureDone = false;
   dom.recDot.hidden = false;
   dom.captureLed.classList.add("rec");
-  // roll the real captured footage while the tape plays through
-  dom.previewVideo.currentTime = 0;
-  dom.previewVideo.play().catch(() => {});
   dom.progressTrack.hidden = false;
   dom.btnStopCapture.hidden = false;
   dom.btnStopCapture.disabled = true;
-  requestAnimationFrame(() => {
-    dom.progressFill.style.transition = "width 2.2s linear";
-    dom.progressFill.style.width = "100%";
-  });
-  setTimeout(() => {
-    if (state.step !== 9) return;
-    SFX.chime();
-    dom.btnStopCapture.disabled = false;
-    dom.btnStopCapture.classList.add("ready-pulse");
-    state.captureDone = true;
-  }, 2300);
+  dom.progressFill.style.transition = "none";
+  dom.progressFill.style.width = "0%";
+  // the progress bar and the Stop gate are driven by the clip's own playback
+  // (see the timeupdate / ended listeners below); the timer is only a safety net.
+  dom.previewVideo.currentTime = 0;
+  const played = dom.previewVideo.play();
+  clearTimeout(captureFallbackTimer);
+  const dur = dom.previewVideo.duration;
+  captureFallbackTimer = setTimeout(markCaptureReady, ((dur > 0 ? dur : 8) + 2) * 1000);
+  if (played && played.catch) {
+    played.catch(() => {
+      // clip couldn't play — sweep the bar on a plain timer instead
+      dom.progressFill.style.transition = "width 2.2s linear";
+      requestAnimationFrame(() => { dom.progressFill.style.width = "100%"; });
+    });
+  }
 }
+
+// keep the capture progress bar in lockstep with the real clip's playback
+dom.previewVideo.addEventListener("timeupdate", () => {
+  if (state.step !== 9 || state.captureDone) return;
+  const dur = dom.previewVideo.duration;
+  if (!(dur > 0)) return;
+  dom.progressFill.style.transition = "none";
+  dom.progressFill.style.width = Math.min(100, (dom.previewVideo.currentTime / dur) * 100) + "%";
+});
+dom.previewVideo.addEventListener("ended", () => {
+  clearTimeout(captureFallbackTimer);
+  markCaptureReady();
+});
 
 dom.btnStopCapture.addEventListener("click", () => {
   if (state.step !== 9 || !state.captureDone) return;
@@ -668,6 +696,7 @@ dom.btnStopCapture.addEventListener("click", () => {
 });
 
 function finishCapture() {
+  clearTimeout(captureFallbackTimer);
   dom.recDot.hidden = true;
   dom.captureLed.classList.remove("rec");
   dom.previewVideo.pause();
