@@ -37,7 +37,7 @@ const PATRONS = {
     outcome: "stable"
   },
   gary: {
-    name: "GARY",
+    name: "JOSEPH",
     tapeLabel: "Speech Night",
     counterStart: 512,
     intro: "Hey, could you copy this one too? It's just an old recording of a speech — my dad would love a copy for his birthday.",
@@ -52,14 +52,14 @@ const ELIGIBILITY_FEEDBACK = {
 
 const CONSEQUENCES = {
   a: "You duplicate the tape. Later, your supervisor checks in: \"Hey — I noticed a duplication request for 'American Voices.' That's licensed network content; we can't copy that here, even as a favor. I'll need you to let patrons down gently in this situation going forward.\"",
-  b: "Gary's expression falls. \"Oh... okay. I didn't realize. Sorry to bother you.\" He leaves looking embarrassed — you followed policy, but he walked away feeling blamed for something he didn't know was wrong.",
-  c: "You explain: \"This looks like it's from a TV special, not something home-recorded — our policy only covers personal recordings. If your dad's a fan of this speech, the library actually has 'American Voices' available to borrow on DVD — I can check if that title's in our system.\" Gary nods: \"Oh — I had no idea. Yeah, that'd be great, thanks for explaining instead of just saying no.\""
+  b: "Joseph's expression falls. \"Oh... okay. I didn't realize. Sorry to bother you.\" He leaves looking embarrassed — you followed policy, but he walked away feeling blamed for something he didn't know was wrong.",
+  c: "You explain: \"This looks like it's from a TV special, not something home-recorded — our policy only covers personal recordings. If your dad's a fan of this speech, the library actually has 'American Voices' available to borrow on DVD — I can check if that title's in our system.\" Joseph nods: \"Oh — I had no idea. Yeah, that'd be great, thanks for explaining instead of just saying no.\""
 };
 
 const REFLECTION = {
   a: "Duplicating copyrighted material — even as a small favor — puts the library at legal risk and isn't something patrons are entitled to ask for, even unknowingly.",
   b: "Saying no was the right call, but patrons deserve to know why — most people aren't trying to break the rules, they just don't know where the line is.",
-  c: "You made the right call and helped Gary understand why — and still found him a way to get what he actually wanted."
+  c: "You made the right call and helped Joseph understand why — and still found him a way to get what he actually wanted."
 };
 
 const STAMPS = {
