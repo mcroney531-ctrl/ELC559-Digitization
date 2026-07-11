@@ -588,9 +588,11 @@ dom.desktopView.querySelectorAll(".desktop-icon").forEach((icon) => {
       SFX.chime();
       dom.desktopView.hidden = true;
       dom.softwareWindow.hidden = false;
+      hideRedirect();
       setStep(6);
     } else {
       flashWrong(icon);
+      showRedirect("That's not the capture app — open ClipCatch.");
     }
   });
 });
@@ -600,10 +602,12 @@ dom.inputSelect.addEventListener("change", () => {
   if (state.step !== 6) return;
   if (dom.inputSelect.value === "composite-ntsc") {
     SFX.click();
+    hideRedirect();
     setStep(7);
     beginPreview();
   } else if (dom.inputSelect.value !== "") {
     flashWrong(dom.inputSelect);
+    showRedirect("Wrong input — VHS uses Composite In — NTSC.");
     dom.inputSelect.value = "";
   }
 });
