@@ -238,8 +238,8 @@ const SFX = (() => {
 
 dom.sfxToggle.addEventListener("click", () => {
   const on = SFX.toggle();
-  dom.sfxToggle.textContent = on ? "SOUND: ON" : "SOUND: OFF";
   dom.sfxToggle.classList.toggle("off", !on);
+  dom.sfxToggle.setAttribute("aria-pressed", String(on));
 });
 
 // ---- scene / step management ----

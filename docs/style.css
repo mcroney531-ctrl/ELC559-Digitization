@@ -89,17 +89,21 @@ button { font-family: inherit; }
   position: absolute;
   top: 14px; right: 18px;
   z-index: 60;
-  font-family: 'VT323', monospace;
-  font-size: 20px;
-  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--amber-glow);
   background: rgba(0,0,0,0.55);
   border: 2px solid var(--amber-dark);
-  border-radius: 4px;
-  padding: 4px 12px;
+  border-radius: 6px;
+  padding: 6px;
   cursor: pointer;
 }
+.sfx-toggle svg { width: 24px; height: 24px; display: block; }
+.sfx-toggle .vol-off { display: none; }
 .sfx-toggle.off { color: #8a8378; border-color: #5a5348; }
+.sfx-toggle.off .vol-on { display: none; }
+.sfx-toggle.off .vol-off { display: block; }
 
 /* ---------- INTRO SCENE (staff portal over the MPC exterior) ---------- */
 #scene-intro {
