@@ -1,4 +1,133 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=Bebas+Neue&family=Chelsea+Market&family=Tomorrow:wght@400;500;700&family=Noto+Sans:wght@400;700&display=swap');
+/* Self-hosted Google Fonts (offline-safe for the Storyline web object).
+   Files in assets/fonts/; latin + latin-ext subsets only. */
+/* latin-ext */
+@font-face {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/bebas-neue-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/bebas-neue-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Chelsea Market';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/chelsea-market-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Chelsea Market';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/chelsea-market-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin */
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/noto-sans-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin */
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/noto-sans-700-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Tomorrow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/tomorrow-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Tomorrow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/tomorrow-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Tomorrow';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(assets/fonts/tomorrow-500-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Tomorrow';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(assets/fonts/tomorrow-500-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Tomorrow';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(assets/fonts/tomorrow-700-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Tomorrow';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(assets/fonts/tomorrow-700-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'VT323';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/vt323-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'VT323';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/vt323-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -303,7 +432,7 @@ button { font-family: inherit; }
 .desk {
   position: absolute;
   inset: 0;
-  background: url("assets/scene-desk.jpg?v=31") no-repeat;
+  background: url("assets/scene-desk.jpg?v=37") no-repeat;
   background-size: 1980px 1320px;
   background-position: 0 -190px;
 }
@@ -367,7 +496,7 @@ button { font-family: inherit; }
 #btn-power-vcr.spotlight-active,
 #btn-play.spotlight-active,
 #btn-rewind.spotlight-active {
-  background-image: url("assets/scene-desk.jpg?v=31");
+  background-image: url("assets/scene-desk.jpg?v=37");
   background-repeat: no-repeat;
   background-size: 1980px 1320px;
 }
@@ -476,6 +605,17 @@ button { font-family: inherit; }
   transition: opacity 0.4s ease;
 }
 .tape-slot-label.inserted .tape-label { opacity: 1; }
+/* Step 11: pulse a ring around the seated tape so the user knows it's clickable
+   (click to eject and return it). */
+.tape-slot-label.tape-eject-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 3px solid var(--amber);
+  border-radius: 6px;
+  pointer-events: none;
+  animation: power-square-pulse 1.1s ease-in-out infinite;
+}
 .vcr-display {
   position: absolute;
   left: 54px; top: 138px;
@@ -511,31 +651,43 @@ button { font-family: inherit; }
 #btn-play.spotlight-active { background-position: -614px -917px; }
 #btn-rewind.spotlight-active { background-position: -547px -917px; }
 .vcr-btn.active-glow { box-shadow: 0 0 16px var(--amber), inset 0 0 0 2px var(--amber); }
-.vcr-btn.vcr-power-pulse { position: absolute; z-index: 21; }
-.vcr-btn.vcr-power-pulse::before {
+
+/* Highlight ring shared by every VCR-button call-out (rewind pulse in step 2,
+   power pulse in step 4, and the play spotlight in step 8). Each button's div
+   sits a touch left of, and runs taller than, its photographed key, so the ring
+   hugs the raised key face and shifts a few px right to line up with the button.
+   Insets are top / right / bottom / left. */
+.vcr-btn.vcr-power-pulse,
+.vcr-btn.vcr-rewind-pulse { position: absolute; z-index: 21; }
+.vcr-btn.vcr-power-pulse::before,
+.vcr-btn.vcr-rewind-pulse::before,
+.vcr-btn.spotlight-active::before {
   content: "";
   position: absolute;
-  inset: -2px;
   border: 3px solid var(--amber);
   border-radius: 4px;
   pointer-events: none;
   animation: power-square-pulse 1.1s ease-in-out infinite;
 }
+/* step 2 rewind pulse — a box that frames the whole key with margin */
+.vcr-btn.vcr-rewind-pulse::before { inset: -8px -10px 1px -4px; }
+/* the power key is a touch larger (56x64) */
+.vcr-btn.vcr-power-pulse::before { inset: 2px -2px 6px 6px; }
+/* step 8 play spotlight — a larger box that frames the whole key with margin */
+.vcr-btn.spotlight-active::before { inset: -6px -5px 3px -5px; }
+
 @keyframes power-square-pulse {
   0%, 100% { opacity: 0.45; transform: scale(0.97); box-shadow: 0 0 6px var(--amber); }
   50% { opacity: 1; transform: scale(1.03); box-shadow: 0 0 14px var(--amber); }
 }
-/* step 2: a smaller pulsing square hugging the rewind button */
-.vcr-btn.vcr-rewind-pulse { position: absolute; z-index: 21; }
-.vcr-btn.vcr-rewind-pulse::before {
-  content: "";
-  position: absolute;
-  inset: 4px;
-  border: 3px solid var(--amber);
-  border-radius: 3px;
-  pointer-events: none;
-  animation: power-square-pulse 1.1s ease-in-out infinite;
-}
+
+/* Anna's step 8 spotlights the play button. Drop the generic square outline and
+   let the hugging ring above stand in, so it lines up like the pulse rings. */
+.vcr-btn.spotlight-active { outline: none; animation: none; }
+
+/* Joseph's flow spotlights the rewind button AND pulses it. Keep a single ring
+   (the pulse), and make it a big box that frames the whole key with margin. */
+.vcr-btn.spotlight-active.vcr-rewind-pulse::before { inset: -8px -10px 1px -4px; }
 .vcr-led {
   position: absolute;
   left: 30px; top: 248px;
@@ -572,9 +724,9 @@ button { font-family: inherit; }
   justify-content: center;
   transition: opacity 0.3s, box-shadow 0.3s;
 }
-.cable-jack.yellow { top: 21px; background: var(--cable-yellow); }
-.cable-jack.white { top: 72px; background: var(--cable-white); }
-.cable-jack.red { left: 41px; top: 121px; background: var(--cable-red); }
+.cable-jack.yellow { left: 44px; top: 26px; background: var(--cable-yellow); }
+.cable-jack.white { left: 44px; top: 67px; background: var(--cable-white); }
+.cable-jack.red { left: 47px; top: 115px; background: var(--cable-red); }
 .cable-area.checking .cable-jack:not(.confirmed) {
   animation: jack-pulse 1.3s ease-in-out infinite;
 }
@@ -705,8 +857,39 @@ button { font-family: inherit; }
 .monitor {
   position: absolute;
   left: 1150px; top: 156px;
-  width: 713px; height: 596px;
+  width: 707px; height: 596px;
   z-index: 8;
+}
+/* Fresh sticky note hung on the top bezel, covering the baked-in "Check levels"
+   note (photo x1764-1855, poking above the bezel) with crisp handwritten SOP
+   reminders — same overlay trick as the wall poster. Height stays auto so the
+   handwriting can never overflow the paper. */
+.monitor-note {
+  position: absolute;
+  left: 600px; top: -29px;
+  width: 112px; height: auto;
+  /* one short line, but still tall enough to reach the screen edge below and
+     fully cover the baked "Check levels" note on the bezel */
+  min-height: 36px;
+  padding: 7px 8px 8px;
+  background: linear-gradient(180deg, #f6e192 0%, #efd472 80%, #e3c45c 100%);
+  box-shadow: 0 3px 7px rgba(0,0,0,0.35);
+  transform: rotate(-2.5deg);
+  font-family: 'Chelsea Market', cursive;
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: #4a3a14;
+  pointer-events: none;
+}
+/* the strip of "tape" holding the note to the bezel */
+.monitor-note::before {
+  content: "";
+  position: absolute;
+  left: 30px; top: 1px;
+  width: 44px; height: 13px;
+  background: rgba(245, 240, 220, 0.55);
+  transform: rotate(1.5deg);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 .monitor-screen {
   width: 100%; height: 100%;
@@ -1149,6 +1332,29 @@ button { font-family: inherit; }
   text-align: center;
 }
 .wo-title[hidden] { display: none; }
+/* Phony video-player play button centered over the title card — decoration
+   only, so the frame reads as a paused stream. */
+.wo-play-badge {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 4px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.wo-play-tri {
+  width: 0; height: 0;
+  border-top: 26px solid transparent;
+  border-bottom: 26px solid transparent;
+  border-left: 42px solid rgba(255, 255, 255, 0.92);
+  margin-left: 10px;
+}
 /* real "American Voices" broadcast title card fills the CRT */
 .wo-title-media {
   position: absolute;
@@ -1476,8 +1682,14 @@ button { font-family: inherit; }
   color: var(--navy-dark);
   font-style: italic;
 }
-.callout-next {
+.callout-nav {
   margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.callout-next,
+.callout-back {
   font-family: 'Noto Sans', sans-serif;
   font-weight: 700;
   font-size: 14px;
@@ -1488,7 +1700,14 @@ button { font-family: inherit; }
   padding: 8px 16px;
   cursor: pointer;
 }
-.callout-next:hover { background: var(--navy); color: #f7f5ef; }
+.callout-next:hover,
+.callout-back:hover { background: var(--navy); color: #f7f5ef; }
+/* Previous reads as the secondary action: lighter until hovered. */
+.callout-back {
+  border-color: rgba(26, 35, 56, 0.5);
+  color: var(--navy);
+}
+.callout-back[hidden] { display: none; }
 
 /* ---------- HAND-DRAWN ICONS (no external font dependency) ---------- */
 .icon-tri-left {
@@ -1544,6 +1763,7 @@ button { font-family: inherit; }
   .vcr-power-pulse,
   .vcr-rewind-pulse,
   .save-group.pulsing,
+  .tape-slot-label.tape-eject-pulse::after,
   .track-arrow,
   .sw-btn.ready-pulse,
   .vcr-btn.spotlight-active,

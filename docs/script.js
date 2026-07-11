@@ -97,6 +97,7 @@ const dom = {
   calloutInstruction: el("callout-instruction"),
   calloutTip: el("callout-tip"),
   calloutNext: el("callout-next"),
+  calloutBack: el("callout-back"),
   vcr: el("vcr"),
   vcrLed: el("vcr-led"),
   monitor: el("monitor"),
@@ -333,6 +334,8 @@ function updateSpotlight(step) {
   dom.btnRewind.classList.toggle("vcr-rewind-pulse", step === 2 && !state.rewound);
   // Step 10: pulsing rectangle around the filename + Save button.
   dom.saveGroup.classList.toggle("pulsing", step === 10);
+  // Step 11: pulse a ring around the seated tape so it reads as "click to eject".
+  dom.tapeGraphic.classList.toggle("tape-eject-pulse", step === 11);
 }
 
 function hideSpotlight() {
@@ -341,6 +344,7 @@ function hideSpotlight() {
   dom.btnPowerVcr.classList.remove("vcr-power-pulse");
   dom.btnRewind.classList.remove("vcr-rewind-pulse");
   dom.saveGroup.classList.remove("pulsing");
+  dom.tapeGraphic.classList.remove("tape-eject-pulse");
   dom.spotlightOverlay.hidden = true;
 }
 
@@ -351,6 +355,9 @@ function updateCallout(step) {
   dom.calloutInstruction.textContent = copy.instruction;
   dom.calloutTip.textContent = copy.tip;
   dom.calloutNext.textContent = step === 11 ? "Eject ›" : "Next Step ›";
+  // Previous is available once past the first step; going back rebuilds the
+  // earlier state so the step can be redone.
+  dom.calloutBack.hidden = step <= 1;
 }
 
 function hideCallout() {
@@ -394,6 +401,7 @@ function resetProcedureUI() {
   dom.btnPowerVcr.classList.remove("active-glow");
   dom.btnPowerVcr.classList.remove("vcr-power-pulse");
   dom.saveGroup.classList.remove("pulsing");
+  dom.tapeGraphic.classList.remove("tape-eject-pulse");
   dom.captureBox.classList.remove("active-glow");
   dom.vcrLed.classList.remove("on");
   dom.captureLed.classList.remove("rec", "on");
@@ -534,14 +542,23 @@ dom.calloutNext.addEventListener("click", () => {
   nudgeStep();
 });
 
+dom.calloutBack.addEventListener("click", () => {
+  if (state.patronKey !== "carol" || state.step <= 1) return;
+  SFX.click();
+  // fastForwardTo rebuilds the world for the target step, so it works going
+  // backward too — it lands you at the start of the previous step.
+  fastForwardTo(state.step - 1);
+});
+
 // ---- Step 2: Rewind ----
 dom.btnRewind.addEventListener("click", () => {
   if (state.step !== 2) { nudgeStep(); return; }
   if (state.rewound) return;
   SFX.click();
   SFX.whirStart();
+  // No highlight box while it rewinds — the spinning counter and whir are the
+  // feedback; the amber box read as a misfitted leftover square.
   dom.btnRewind.classList.remove("vcr-rewind-pulse");
-  dom.btnRewind.classList.add("active-glow");
   let n = PATRONS[state.patronKey].counterStart;
   const timer = setInterval(() => {
     if (state.step !== 2) { clearInterval(timer); SFX.whirStop(); return; }
@@ -894,35 +911,30 @@ function fastForwardTo(targetStep) {
 // Equipment is already known-good from Carol's shift, so setup happens quietly
 // in the background; the only manual beat left for Gary is the rewind itself.
 function runGaryMontage() {
-  setTimeout(() => {
-    SFX.clunk();
-    dom.tapeGraphic.classList.add("inserted");
-    dom.tapeCounter.textContent = String(PATRONS.gary.counterStart).padStart(4, "0");
-    setStep(2);
-  }, 400);
-  setTimeout(() => {
-    confirmAllCables();
-  }, 750);
-  setTimeout(() => {
-    state.vcrPowered = true;
-    state.capturePowered = true;
-    powerOnVisuals();
-  }, 1050);
-  setTimeout(() => {
-    dom.desktopView.hidden = true;
-    dom.softwareWindow.hidden = false;
-  }, 1350);
-  setTimeout(() => {
-    dom.inputSelect.value = "composite-ntsc";
-  }, 1650);
-  // Once the quiet setup is done, dim everything and spotlight the one manual
-  // beat left for Joseph — the rewind — so it's clear what to do.
+  // Joseph is the second patron; the station is already known-good from Anna's
+  // shift. Bring it up fully set up in one shot — this runs behind the handoff
+  // fade, so nothing visibly cascades. Land straight in ClipCatch (no replay of
+  // the desktop→app open) and skip the fresh-power-up glow so no stray box
+  // flashes on the power button. The only manual beat left is the rewind.
+  dom.tapeGraphic.classList.add("inserted");
+  dom.tapeCounter.textContent = String(PATRONS.gary.counterStart).padStart(4, "0");
+  confirmAllCables();
+  state.vcrPowered = true;
+  state.capturePowered = true;
+  dom.vcrLed.classList.add("on");
+  dom.captureLed.classList.add("on");
+  dom.desktopView.hidden = true;
+  dom.softwareWindow.hidden = false;
+  dom.inputSelect.value = "composite-ntsc";
+  setStep(2);
+  SFX.clunk();
+  // Once the handoff fade settles, dim the recap and spotlight the rewind.
   setTimeout(() => {
     if (state.step === 2 && state.patronKey === "gary") {
       applySpotlight([dom.btnRewind]);
       dom.btnRewind.classList.add("vcr-rewind-pulse");
     }
-  }, 2000);
+  }, 1000);
 }
 
 // ---- Warning reveal: full-screen CRT takeover ----

@@ -6,8 +6,8 @@
 <title>Patron Media Digitization — Media Preservation Center</title>
 <!-- Preload the procedure-scene backdrop so it's decoded before Start Shift,
      avoiding a flash of the empty desk on the first scene switch. -->
-<link rel="preload" as="image" href="assets/scene-desk.jpg?v=31">
-<link rel="stylesheet" href="style.css?v=31">
+<link rel="preload" as="image" href="assets/scene-desk.jpg?v=37">
+<link rel="stylesheet" href="style.css?v=37">
 </head>
 <body>
 
@@ -95,7 +95,10 @@
         <div class="callout-title" id="callout-title">Step 1 of 11</div>
         <p class="callout-instruction" id="callout-instruction"></p>
         <p class="callout-tip" id="callout-tip"></p>
-        <button class="callout-next" id="callout-next" type="button">Next Step &rsaquo;</button>
+        <div class="callout-nav">
+          <button class="callout-back" id="callout-back" type="button" hidden>&lsaquo; Previous</button>
+          <button class="callout-next" id="callout-next" type="button">Next Step &rsaquo;</button>
+        </div>
       </div>
 
       <button class="tape-waiting" id="tape-waiting" type="button">
@@ -135,6 +138,7 @@
       </div>
 
       <div class="monitor" id="monitor">
+        <div class="monitor-note" aria-hidden="true">rewind first!</div>
         <div class="monitor-screen" id="monitor-screen">
           <div class="desktop-view" id="desktop-view">
             <div class="desktop-icon" data-icon="correct"><span class="app-glyph app-glyph-video"></span><span>ClipCatch</span></div>
@@ -215,6 +219,7 @@
         <video class="wo-title-media" id="wo-title-video" poster="assets/american-voices-poster.jpg" muted loop playsinline preload="auto">
           <source src="assets/american-voices.webm" type="video/webm">
         </video>
+        <div class="wo-play-badge" aria-hidden="true"><span class="wo-play-tri"></span></div>
       </div>
     </div>
     <p class="wo-caption" id="wo-caption" hidden>Wait &mdash; this doesn't look like a home recording&hellip;</p>
@@ -256,6 +261,6 @@
 
 </div>
 
-<script src="script.js?v=31"></script>
+<script src="script.js?v=37"></script>
 </body>
 </html>
