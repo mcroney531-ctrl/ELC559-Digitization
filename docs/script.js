@@ -38,7 +38,7 @@ const PATRONS = {
   },
   gary: {
     name: "JOSEPH",
-    tapeLabel: "Speech Night",
+    tapeLabel: "Speeches",
     counterStart: 512,
     intro: "Hey, could you copy this one too? It's just an old recording of a speech — my dad would love a copy for his birthday.",
     outcome: "warning"
