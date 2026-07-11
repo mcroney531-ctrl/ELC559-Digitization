@@ -684,7 +684,7 @@ dom.trackingSlider.addEventListener("input", () => {
 
 // ---- Step 8: Record then Play ----
 dom.btnRecord.addEventListener("click", () => {
-  if (state.step !== 8) return;
+  if (state.step !== 8) { nudgeStep(); return; }
   SFX.click();
   state.recordClicked = true;
   dom.btnRecord.classList.add("active");
