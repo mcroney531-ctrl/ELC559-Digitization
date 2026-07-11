@@ -340,7 +340,7 @@ function resetProcedureUI() {
   dom.btnPowerVcr.classList.remove("vcr-power-pulse");
   dom.captureBox.classList.remove("active-glow");
   dom.vcrLed.classList.remove("on");
-  dom.captureLed.classList.remove("rec");
+  dom.captureLed.classList.remove("rec", "on");
   dom.cableArea.classList.remove("checking", "y-ok", "w-ok", "r-ok");
   dom.cableBundle.querySelectorAll(".cable-jack").forEach((j) => j.classList.remove("confirmed"));
   dom.desktopView.hidden = false;
@@ -545,6 +545,7 @@ function powerOnVisuals() {
   dom.btnPowerVcr.classList.add("active-glow");
   dom.captureBox.classList.add("active-glow");
   dom.vcrLed.classList.add("on");
+  dom.captureLed.classList.add("on");
 }
 dom.btnPowerVcr.addEventListener("click", () => {
   if (state.step !== 4) return;
@@ -560,6 +561,7 @@ dom.captureBox.addEventListener("click", () => {
   SFX.click();
   state.capturePowered = true;
   dom.captureBox.classList.add("active-glow");
+  dom.captureLed.classList.add("on");
   checkPower();
 });
 
