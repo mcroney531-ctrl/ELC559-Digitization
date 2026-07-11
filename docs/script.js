@@ -28,8 +28,8 @@ const STEP_COPY = [
 
 const PATRONS = {
   carol: {
-    name: "CAROL",
-    tapeLabel: "Carol's Graduation<br>Ridgeline University, 1998",
+    name: "ANNA",
+    tapeLabel: "Anna's Graduation<br>Ridgeline University, 1998",
     counterStart: 347,
     intro: "Hi — I'd love to get this digitized if possible. It's a recording I made of my college graduation. We had a pretty well-known speaker that year, so I want to make sure it survives!",
     closing: "Thank you so much — this means a lot. My mom's going to cry when she sees this.",
@@ -47,7 +47,7 @@ const PATRONS = {
 
 const ELIGIBILITY_FEEDBACK = {
   yes: "Correct — personal recordings are always eligible. Let's get started.",
-  unsure: "You don't need to escalate this one — it's clearly Carol's own footage. Let's get started."
+  unsure: "You don't need to escalate this one — it's clearly Anna's own footage. Let's get started."
 };
 
 const CONSEQUENCES = {
