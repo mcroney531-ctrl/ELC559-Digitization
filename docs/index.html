@@ -7,7 +7,7 @@
 <!-- Preload the procedure-scene backdrop so it's decoded before Start Shift,
      avoiding a flash of the empty desk on the first scene switch. -->
 <link rel="preload" as="image" href="assets/scene-desk.jpg">
-<link rel="stylesheet" href="style.css?v=23">
+<link rel="stylesheet" href="style.css?v=24">
 </head>
 <body>
 
@@ -149,8 +149,10 @@
               <div class="software-controls">
                 <button id="btn-record" class="sw-btn record"><span class="icon-circle"></span> Record</button>
                 <button id="btn-stop-capture" class="sw-btn" hidden disabled><span class="icon-square"></span> Stop</button>
-                <input type="text" id="filename-field" class="filename-field" hidden readonly>
-                <button id="btn-save" class="sw-btn" hidden>Save</button>
+                <span class="save-group" id="save-group">
+                  <input type="text" id="filename-field" class="filename-field" hidden readonly>
+                  <button id="btn-save" class="sw-btn" hidden>Save</button>
+                </span>
               </div>
             </div>
           </div>
@@ -234,6 +236,6 @@
 
 </div>
 
-<script src="script.js?v=23"></script>
+<script src="script.js?v=24"></script>
 </body>
 </html>

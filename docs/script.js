@@ -48,7 +48,7 @@ const PATRONS = {
     counterStart: 347,
     intro: "Hi — I'd love to get this digitized if possible. It's a recording I made of my college graduation. We had a pretty well-known speaker that year, so I want to make sure it survives!",
     closing: "Thank you so much — this means a lot.",
-    filename: "Whitfield_Graduation_1998.mp4",
+    filename: "Ridgeline_Graduation_1998.mp4",
     outcome: "stable"
   },
   gary: {
@@ -129,6 +129,7 @@ const dom = {
   btnStopCapture: el("btn-stop-capture"),
   filenameField: el("filename-field"),
   btnSave: el("btn-save"),
+  saveGroup: el("save-group"),
   eligibilityCard: el("eligibility-card"),
   eligibilityToast: el("eligibility-toast"),
   avatarCarol: el("avatar-carol"),
@@ -325,12 +326,18 @@ function updateSpotlight(step) {
   // Step 4 spotlights the whole VCR; also pulse a square just around its
   // power button until the VCR itself is powered on.
   dom.btnPowerVcr.classList.toggle("vcr-power-pulse", step === 4 && !state.vcrPowered);
+  // Step 2: a smaller pulsing square around the rewind button until rewound.
+  dom.btnRewind.classList.toggle("vcr-rewind-pulse", step === 2 && !state.rewound);
+  // Step 10: pulsing rectangle around the filename + Save button.
+  dom.saveGroup.classList.toggle("pulsing", step === 10);
 }
 
 function hideSpotlight() {
   document.querySelectorAll(".spotlight-active").forEach((node) => node.classList.remove("spotlight-active"));
   document.querySelectorAll(".spotlight-lift").forEach((node) => node.classList.remove("spotlight-lift"));
   dom.btnPowerVcr.classList.remove("vcr-power-pulse");
+  dom.btnRewind.classList.remove("vcr-rewind-pulse");
+  dom.saveGroup.classList.remove("pulsing");
   dom.spotlightOverlay.hidden = true;
 }
 
@@ -380,9 +387,10 @@ function resetProcedureUI() {
   dom.tapeGraphic.classList.remove("inserted");
   dom.tapeWaiting.classList.remove("used", "floating", "pre-insert");
   dom.claimTicket.hidden = true;
-  dom.btnRewind.classList.remove("active-glow");
+  dom.btnRewind.classList.remove("active-glow", "vcr-rewind-pulse");
   dom.btnPowerVcr.classList.remove("active-glow");
   dom.btnPowerVcr.classList.remove("vcr-power-pulse");
+  dom.saveGroup.classList.remove("pulsing");
   dom.captureBox.classList.remove("active-glow");
   dom.vcrLed.classList.remove("on");
   dom.captureLed.classList.remove("rec", "on");
@@ -519,6 +527,7 @@ dom.btnRewind.addEventListener("click", () => {
   if (state.rewound) return;
   SFX.click();
   SFX.whirStart();
+  dom.btnRewind.classList.remove("vcr-rewind-pulse");
   dom.btnRewind.classList.add("active-glow");
   let n = PATRONS[state.patronKey].counterStart;
   const timer = setInterval(() => {
@@ -879,7 +888,10 @@ function runGaryMontage() {
   // Once the quiet setup is done, dim everything and spotlight the one manual
   // beat left for Joseph — the rewind — so it's clear what to do.
   setTimeout(() => {
-    if (state.step === 2 && state.patronKey === "gary") applySpotlight([dom.btnRewind]);
+    if (state.step === 2 && state.patronKey === "gary") {
+      applySpotlight([dom.btnRewind]);
+      dom.btnRewind.classList.add("vcr-rewind-pulse");
+    }
   }, 2000);
 }
 
