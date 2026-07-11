@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=Bebas+Neue&family=Special+Elite&family=Noto+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Bebas+Neue&family=Chelsea+Market&family=Special+Elite&family=Noto+Sans:wght@400;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -307,7 +307,7 @@ button { font-family: inherit; }
   50% { box-shadow: 0 6px 14px rgba(0,0,0,0.4), 0 0 0 3px var(--amber), 0 0 30px var(--amber); }
 }
 .tape-waiting-label {
-  font-family: 'Special Elite', monospace;
+  font-family: 'Chelsea Market', cursive;
   font-size: 12px;
   color: #222;
   background: var(--cream);
@@ -361,7 +361,7 @@ button { font-family: inherit; }
   cursor: pointer;
 }
 .tape-label {
-  font-family: 'Special Elite', monospace;
+  font-family: 'Chelsea Market', cursive;
   font-size: 12px;
   background: var(--cream);
   color: #222;
