@@ -125,6 +125,7 @@ const dom = {
   woStatic: el("wo-static"),
   woFbi: el("wo-fbi"),
   woTitle: el("wo-title"),
+  woTitleVideo: el("wo-title-video"),
   woCaption: el("wo-caption"),
   btnPauseThink: el("btn-pause-think"),
   decisionChoices: el("decision-choices"),
@@ -836,6 +837,8 @@ function showWarningReveal() {
   setTimeout(() => {
     dom.woStatic.hidden = true;
     dom.woTitle.hidden = false;
+    dom.woTitleVideo.currentTime = 0;
+    dom.woTitleVideo.play().catch(() => {});
     SFX.chime();
   }, 3500);
   setTimeout(() => {
@@ -846,6 +849,7 @@ function showWarningReveal() {
 
 dom.btnPauseThink.addEventListener("click", () => {
   SFX.click();
+  dom.woTitleVideo.pause();
   dom.warningOverlay.hidden = true;
   showScene("scene-decision");
 });
