@@ -32,7 +32,7 @@ const PATRONS = {
     tapeLabel: "Anna's Graduation<br>Ridgeline University, 1998",
     counterStart: 347,
     intro: "Hi — I'd love to get this digitized if possible. It's a recording I made of my college graduation. We had a pretty well-known speaker that year, so I want to make sure it survives!",
-    closing: "Thank you so much — this means a lot. My mom's going to cry when she sees this.",
+    closing: "Thank you so much — this means a lot.",
     filename: "Whitfield_Graduation_1998.mp4",
     outcome: "stable"
   },
@@ -287,10 +287,10 @@ function renderDots() {
   }
 }
 
-function updateSpotlight(step) {
+function applySpotlight(targets) {
   document.querySelectorAll(".spotlight-active").forEach((node) => node.classList.remove("spotlight-active"));
   document.querySelectorAll(".spotlight-lift").forEach((node) => node.classList.remove("spotlight-lift"));
-  const targets = (STEP_TARGETS[step] ? STEP_TARGETS[step]() : []).filter(Boolean);
+  targets = targets.filter(Boolean);
   targets.forEach((t) => {
     t.classList.add("spotlight-active");
     // A button nested inside the VCR or capture box is trapped in that
@@ -301,6 +301,10 @@ function updateSpotlight(step) {
     if (trap && trap !== t) trap.classList.add("spotlight-lift");
   });
   dom.spotlightOverlay.hidden = targets.length === 0;
+}
+
+function updateSpotlight(step) {
+  applySpotlight(STEP_TARGETS[step] ? STEP_TARGETS[step]() : []);
   // Step 4 spotlights the whole VCR; also pulse a square just around its
   // power button until the VCR itself is powered on.
   dom.btnPowerVcr.classList.toggle("vcr-power-pulse", step === 4 && !state.vcrPowered);
@@ -833,6 +837,11 @@ function runGaryMontage() {
   setTimeout(() => {
     dom.inputSelect.value = "composite-ntsc";
   }, 1650);
+  // Once the quiet setup is done, dim everything and spotlight the one manual
+  // beat left for Joseph — the rewind — so it's clear what to do.
+  setTimeout(() => {
+    if (state.step === 2 && state.patronKey === "gary") applySpotlight([dom.btnRewind]);
+  }, 2000);
 }
 
 // ---- Warning reveal: full-screen CRT takeover ----
