@@ -432,7 +432,7 @@ button { font-family: inherit; }
 .desk {
   position: absolute;
   inset: 0;
-  background: url("assets/scene-desk.jpg?v=38") no-repeat;
+  background: url("assets/scene-desk.jpg?v=39") no-repeat;
   background-size: 1980px 1320px;
   background-position: 0 -190px;
 }
@@ -496,7 +496,7 @@ button { font-family: inherit; }
 #btn-power-vcr.spotlight-active,
 #btn-play.spotlight-active,
 #btn-rewind.spotlight-active {
-  background-image: url("assets/scene-desk.jpg?v=38");
+  background-image: url("assets/scene-desk.jpg?v=39");
   background-repeat: no-repeat;
   background-size: 1980px 1320px;
 }
@@ -726,7 +726,7 @@ button { font-family: inherit; }
 }
 .cable-jack.yellow { left: 44px; top: 26px; background: var(--cable-yellow); }
 .cable-jack.white { left: 44px; top: 67px; background: var(--cable-white); }
-.cable-jack.red { left: 47px; top: 114px; background: var(--cable-red); }
+.cable-jack.red { left: 47px; top: 112px; background: var(--cable-red); }
 .cable-area.checking .cable-jack:not(.confirmed) {
   animation: jack-pulse 1.3s ease-in-out infinite;
 }
@@ -755,7 +755,7 @@ button { font-family: inherit; }
 /* ---------- cable hookup-guide popover ---------- */
 .cable-popover {
   position: absolute;
-  left: 520px; top: 96px;
+  left: 760px; top: 96px;
   width: 340px;
   z-index: 26;
   background: linear-gradient(180deg, var(--equip-dark), #141416);
