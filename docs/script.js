@@ -334,6 +334,8 @@ function updateSpotlight(step) {
   dom.btnRewind.classList.toggle("vcr-rewind-pulse", step === 2 && !state.rewound);
   // Step 10: pulsing rectangle around the filename + Save button.
   dom.saveGroup.classList.toggle("pulsing", step === 10);
+  // Step 11: pulsing box over the inserted tape — it's the eject click target.
+  dom.tapeGraphic.classList.toggle("tape-eject-pulse", step === 11);
 }
 
 function hideSpotlight() {
@@ -342,6 +344,7 @@ function hideSpotlight() {
   dom.btnPowerVcr.classList.remove("vcr-power-pulse");
   dom.btnRewind.classList.remove("vcr-rewind-pulse");
   dom.saveGroup.classList.remove("pulsing");
+  dom.tapeGraphic.classList.remove("tape-eject-pulse");
   dom.spotlightOverlay.hidden = true;
 }
 
@@ -391,7 +394,7 @@ function flashWrong(node) {
 
 function resetProcedureUI() {
   hideRedirect();
-  dom.tapeGraphic.classList.remove("inserted");
+  dom.tapeGraphic.classList.remove("inserted", "tape-eject-pulse");
   dom.tapeWaiting.classList.remove("used", "floating", "pre-insert");
   dom.claimTicket.hidden = true;
   dom.btnRewind.classList.remove("active-glow", "vcr-rewind-pulse");
@@ -553,7 +556,6 @@ dom.btnRewind.addEventListener("click", () => {
   SFX.click();
   SFX.whirStart();
   dom.btnRewind.classList.remove("vcr-rewind-pulse");
-  dom.btnRewind.classList.add("active-glow");
   let n = PATRONS[state.patronKey].counterStart;
   const timer = setInterval(() => {
     if (state.step !== 2) { clearInterval(timer); SFX.whirStop(); return; }
@@ -565,7 +567,6 @@ dom.btnRewind.addEventListener("click", () => {
       SFX.clunk();
       dom.tapeCounter.textContent = "0000";
       state.rewound = true;
-      dom.btnRewind.classList.remove("active-glow");
       if (state.patronKey === "gary") {
         showWarningReveal();
       } else {
@@ -906,40 +907,32 @@ function fastForwardTo(targetStep) {
 // Equipment is already known-good from Carol's shift, so setup happens quietly
 // in the background; the only manual beat left for Gary is the rewind itself.
 function runGaryMontage() {
+  // Joseph's station is already set up: land straight in the capture software
+  // with the input selected — no desktop-to-ClipCatch swap mid-montage.
+  dom.desktopView.hidden = true;
+  dom.softwareWindow.hidden = false;
+  dom.inputSelect.value = "composite-ntsc";
+  // Power reads as LEDs only; the amber glow boxes are Anna's step-4 manual
+  // feedback and look like stray highlight squares here.
+  state.vcrPowered = true;
+  state.capturePowered = true;
+  dom.vcrLed.classList.add("on");
+  dom.captureLed.classList.add("on");
+  confirmAllCables();
   setTimeout(() => {
     SFX.clunk();
     dom.tapeGraphic.classList.add("inserted");
     dom.tapeCounter.textContent = String(PATRONS.gary.counterStart).padStart(4, "0");
     setStep(2);
   }, 400);
-  setTimeout(() => {
-    confirmAllCables();
-  }, 750);
-  setTimeout(() => {
-    state.vcrPowered = true;
-    state.capturePowered = true;
-    powerOnVisuals();
-  }, 1050);
-  setTimeout(() => {
-    dom.desktopView.hidden = true;
-    dom.softwareWindow.hidden = false;
-  }, 1350);
-  setTimeout(() => {
-    dom.inputSelect.value = "composite-ntsc";
-  }, 1650);
   // Once the quiet setup is done, dim everything and spotlight the one manual
   // beat left for Joseph — the rewind — so it's clear what to do.
   setTimeout(() => {
     if (state.step === 2 && state.patronKey === "gary") {
       applySpotlight([dom.btnRewind]);
       dom.btnRewind.classList.add("vcr-rewind-pulse");
-      // The power-on glow was feedback for the auto power-up beat; clear it so
-      // the power button and capture box carry no stray box once the scene
-      // dims to spotlight only the rewind.
-      dom.btnPowerVcr.classList.remove("active-glow");
-      dom.captureBox.classList.remove("active-glow");
     }
-  }, 2000);
+  }, 1400);
 }
 
 // ---- Warning reveal: full-screen CRT takeover ----

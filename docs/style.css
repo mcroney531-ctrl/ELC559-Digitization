@@ -432,7 +432,7 @@ button { font-family: inherit; }
 .desk {
   position: absolute;
   inset: 0;
-  background: url("assets/scene-desk.jpg?v=36") no-repeat;
+  background: url("assets/scene-desk.jpg?v=37") no-repeat;
   background-size: 1980px 1320px;
   background-position: 0 -190px;
 }
@@ -496,7 +496,7 @@ button { font-family: inherit; }
 #btn-power-vcr.spotlight-active,
 #btn-play.spotlight-active,
 #btn-rewind.spotlight-active {
-  background-image: url("assets/scene-desk.jpg?v=36");
+  background-image: url("assets/scene-desk.jpg?v=37");
   background-repeat: no-repeat;
   background-size: 1980px 1320px;
 }
@@ -605,6 +605,16 @@ button { font-family: inherit; }
   transition: opacity 0.4s ease;
 }
 .tape-slot-label.inserted .tape-label { opacity: 1; }
+/* step 11: pulsing box over the inserted tape — it's the eject click target */
+.tape-slot-label.tape-eject-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 3px solid var(--amber);
+  border-radius: 6px;
+  pointer-events: none;
+  animation: power-square-pulse 1.1s ease-in-out infinite;
+}
 .vcr-display {
   position: absolute;
   left: 54px; top: 138px;
